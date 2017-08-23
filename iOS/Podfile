@@ -1,0 +1,10 @@
+source 'https://git.coding.net/hging/Specs.git'
+
+target :'webc' do
+
+pod 'Masonry'
+pod 'Toast'
+pod 'SDWebImage'
+pod 'SSZipArchive'
+
+end

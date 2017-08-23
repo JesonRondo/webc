@@ -1,0 +1,102 @@
+{
+  "banner": {
+    "image": "/img/banner.gif",
+    "title": "SMARTER TECH, BETTER LIFE",
+    "subTitle": "Items up to 20% off"
+  },
+  "recommend": [{
+    "type": "m1",
+    "tit": "External battery",
+    "goods": [{
+      "img": "/img/m1-b1.jpg",
+      "no": "VSPB402B",
+      "t": "Vinsic 28000mAh QC 3.0 Quick Charger Power Bank",
+      "price": "US $36.00",
+      "oldPrice": "US $99.99",
+      "desc": ""
+    }, {
+      "img": "/img/m1-g2.png",
+      "no": "VSPB401B",
+      "t": "Vinsic 30000mAh Laptop Power Bank",
+      "price": "US $56.39",
+      "oldPrice": "US $119.98",
+      "desc": "High-speed charging with multiple output ports"
+    }, {
+      "img": "/img/m1-g3.png",
+      "no": "VSPB304D",
+      "t": "Vinsic 20000mAh Type C Power Bank",
+      "price": "US $24.96",
+      "oldPrice": "US $63.99",
+      "desc": "Slim and lightweight"
+    }]
+  }, {
+    "type": "m2",
+    "tit": "Car Accessories",
+    "goods": [{
+      "img": "/img/m3-g1.jpg",
+      "t": "WiFi DVR",
+      "price": "US $28.74",
+      "oldPrice": "US $66.84",
+      "desc": "Mobile app connectivity, WiFi DVR"
+    }, {
+      "img": "/img/m3-g2.jpg",
+      "t": "Universal Car Multimedia Player",
+      "price": "US $201.45",
+      "oldPrice": "US $255.00",
+      "desc": "10-inch display, Android 6.0, quad core processor, 2GB RAM + 16GB storage"
+    }, {
+      "img": "/img/m3-g3.jpg",
+      "t": "Jado Car DVR Mirror",
+      "price": "US $85.74",
+      "oldPrice": "US $117.45",
+      "desc": "Dual lens recorder, 1920x1080, 140-degree lens, 5-inch display"
+    }]
+  }, {
+    "type": "m1",
+    "tit": "Switches & Sockets",
+    "goods": [{
+      "img": "/img/m2-b1.jpg",
+      "no": "",
+      "t": "LIVOLO C701-11/2/3/5",
+      "price": "US $10.75",
+      "oldPrice": "US $15.81",
+      "desc": ""
+    }, {
+      "img": "/img/m1-g2.png",
+      "no": "",
+      "t": "LIVOLO C702-11/2/3/5",
+      "price": "US $12.94",
+      "oldPrice": "US $19.03",
+      "desc": "- 220 – 250V - Max current of 5A"
+    }, {
+      "img": "/img/m2-g3.png",
+      "no": "",
+      "t": "LIVOLO VL-C7C1EU-11",
+      "price": "US $7.58",
+      "oldPrice": "US $8.61",
+      "desc": "Slim and lightweight"
+    }]
+  }, {
+    "type": "m2",
+    "tit": "Security & Protection",
+    "goods": [{
+      "img": "/img/m4-g1.jpg",
+      "t": "Reolink Argus 1080P Outdoor Camera",
+      "price": "US $93.99",
+      "oldPrice": "US $99.99",
+      "desc": "- 100% wire-free, battery-powered camera"
+    }, {
+      "img": "/img/m4-g2.jpg",
+      "t": "360 IP Home Camera 720P Night Vision",
+      "price": "US $39.99",
+      "oldPrice": "US $49.99",
+      "desc": "- Mini smart WiFi camera, night vision and two-way audio"
+    }, {
+      "img": "/img/m4-g3.jpg",
+      "t": "KERUIW18",
+      "price": "US $63.83",
+      "oldPrice": "US $86.25",
+      "desc": "- WiFi + GSM dual alarm system"
+    }]
+  }]
+}

@@ -1,5 +1,6 @@
 <template>
-  <div class="banner" :style="{ 'background-image': `url(${image})` }">
+  <div class="banner">
+    <img class="bg" :src="image" onload="jsbrige.blankOver()" />
     <span class="tit">{{ title }}</span>
     <span class="desc">{{ subTitle }}</span>
   </div>
@@ -28,7 +29,9 @@ export default {
 .banner {
   position: relative;
   height: 7.47rem;
-  background-size: cover;
+}
+.bg {
+  width: 100%;
 }
 .tit {
   position: absolute;

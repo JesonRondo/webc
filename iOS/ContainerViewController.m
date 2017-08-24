@@ -7,7 +7,7 @@
 //
 
 #import "ContainerViewController.h"
-#import "ResourceManage.h"
+#import "WebViewJavascriptBridge.h"
 #import "ProcessLineView.h"
 #import "Logger.h"
 #import <Masonry.h>
@@ -16,6 +16,7 @@
 {
     NSURLConnection *theConnection;
 }
+@property(strong, nonatomic) WebViewJavascriptBridge* bridge;
 @property(strong, nonatomic) NSString *url;
 @property(strong, nonatomic) UIWebView *webview;
 @property(strong, nonatomic) ProcessLineView *processLine;
@@ -24,39 +25,63 @@
 
 @implementation ContainerViewController
 
+static ContainerViewController *_backInstance = nil;
+
++ (void)load {
+    _backInstance = [ContainerViewController getInstance];
+}
+
++ (instancetype)getInstance {
+    ContainerViewController * temp = _backInstance;
+    _backInstance = nil;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _backInstance = [[ContainerViewController alloc] init];
+        _backInstance.webview = [[UIWebView alloc] init];
+    });
+    
+    if (!temp) {
+        temp = [[ContainerViewController alloc] init];
+        temp.webview = [[UIWebView alloc] init];
+    }
+    
+    return temp;
+}
+
 - (id)initWithUrl:(NSString *)url {
-    if (self) {
-        self = [super init];
-        self.webview = [[UIWebView alloc] init];
+    [[Logger shareInstance] time];
+    self = [ContainerViewController getInstance];
+    
+    
+    if ([url isEqualToString:@"test"]) {
+        url = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"];
     }
     
     self.url = url;
-
+    
     NSURL *originUrl = [NSURL URLWithString:self.url];
-    
-    NSLog(@"%@", originUrl);
-    NSURL *resUrl = [[ResourceManage shareInstance] findResourceURLWithURL:originUrl];
-    NSLog(@"%@", resUrl);
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:resUrl
+    NSURLRequest *request = [NSURLRequest requestWithURL:originUrl
                                              cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                          timeoutInterval:15];
+    
     [self.webview loadRequest:request];
-
+    
+    [[Logger shareInstance] timeEnd];
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[Logger shareInstance] time];
-    self.navigationItem.title = @"Webview";
+    self.navigationItem.title = @"...";
     [self.view setBackgroundColor:[UIColor whiteColor]];
-
+    
     self.webview.frame = self.view.bounds;
     self.webview.delegate = self;
     self.webview.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     [self.view addSubview:self.webview];
+    
+    [self registPlugins];
     
     CGRect processLineFrame = CGRectMake(
                                          0,
@@ -67,9 +92,18 @@
     self.processLine = [[ProcessLineView alloc] initWithFrame:processLineFrame];
     self.processLine.lineColor = [UIColor redColor];
     [self.view addSubview:self.processLine];
-
-    [[Logger shareInstance] timeEnd];
     // Do any additional setup after loading the view.
+}
+
+- (void)registPlugins {
+    [self.webview stringByEvaluatingJavaScriptFromString:@"function setupWebViewJavascriptBridge(callback) {\nif (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }\nif (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }\nwindow.WVJBCallbacks = [callback];\nvar WVJBIframe = document.createElement('iframe');\nWVJBIframe.style.display = 'none';\nWVJBIframe.src = 'https://__bridge_loaded__';\ndocument.documentElement.appendChild(WVJBIframe);\nsetTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)\n}"];
+    
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:self.webview];
+    
+    [self.bridge registerHandler:@"blankOver"
+                         handler:^(id data, WVJBResponseCallback responseCallback) {
+                             [[Logger shareInstance] timeEnd];
+                         }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,14 +123,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - UIWebview delegate
 
@@ -104,13 +138,17 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self.processLine startLoadingAnimation];
 }
+
 //网页加载完成
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (![webView isLoading]) {
         [self.processLine endLoadingAnimation];
-        [[Logger shareInstance] timeEnd];
     }
+    
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.navigationItem.title = title;
 }
+
 //网页加载错误
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSString *errorMsg = (NSString *)[[error userInfo] valueForKey:@"NSLocalizedDescription"];

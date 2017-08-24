@@ -31,7 +31,7 @@ export default {
   },
   head () {
     return {
-      title: 'SMARTER TECH, BETTER LIFE'
+      title: 'SMARTER TECH'
     }
   },
   computed: {

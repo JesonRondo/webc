@@ -7,19 +7,20 @@
 //
 
 #import "RootViewController.h"
+#import "ResourceManage.h"
 #import "ContainerViewController.h"
 #import "Logger.h"
 #import <Masonry.h>
 #import <Toast/UIView+Toast.h>
 
 typedef enum {
-    FE_ONLINE, SSR_ONLINE, FE_OFFLINE, SSR_OFFLINE,
+    FE_ONLINE, PROXY_OFFLINE, FILE_OFFLINE,
     CLEAN
 } ClickType;
 
 @interface RootViewController ()
 
-//@property (nonatomic, strong) ContainerViewController *weber;
+@property(nonatomic, strong) ContainerViewController *container;
 
 @end
 
@@ -28,9 +29,6 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-//    self.weber = [[ContainerViewController alloc] initWithUrl:@"http://172.17.37.51:3000/ssr?_speed=1"];
-    
     self.navigationItem.title = @"WebC";
     [self addButton];
 }
@@ -81,21 +79,19 @@ typedef enum {
           forControlEvents:UIControlEventTouchUpInside];
             break;
             
-        case SSR_ONLINE:
+        case PROXY_OFFLINE:
             [btn addTarget:self
-                    action:@selector(openSSROnline)
+                    action:@selector(openProxyOffline)
+          forControlEvents:UIControlEventTouchDown];
+            
+            [btn addTarget:self
+                    action:@selector(openIt)
           forControlEvents:UIControlEventTouchUpInside];
             break;
             
-        case FE_OFFLINE:
+        case FILE_OFFLINE:
             [btn addTarget:self
-                    action:@selector(openFEOffline)
-          forControlEvents:UIControlEventTouchUpInside];
-            break;
-            
-        case SSR_OFFLINE:
-            [btn addTarget:self
-                    action:@selector(openSSROffline)
+                    action:@selector(openFileOffline)
           forControlEvents:UIControlEventTouchUpInside];
             break;
         
@@ -113,37 +109,47 @@ typedef enum {
 - (void)addButton {
     // 直接打开
     [self putButton:@"前端渲染" offsetTo:-100 WithType:FE_ONLINE];
-    [self putButton:@"后端渲染" offsetTo:-50 WithType:SSR_ONLINE];
-    [self putButton:@"前端静态" offsetTo:0 WithType:FE_OFFLINE];
-    [self putButton:@"后端静态" offsetTo:50 WithType:SSR_OFFLINE];
+    [self putButton:@"代理离线" offsetTo:-25 WithType:PROXY_OFFLINE];
+    [self putButton:@"文件离线" offsetTo:50 WithType:FILE_OFFLINE];
     // 清理缓存
     [self putButton:@"清理缓存" offsetTo:150 WithType:CLEAN];
 }
 
 - (void)openUrl:(NSString *)url {
     [[Logger shareInstance] time];
-    
-    ContainerViewController *container = [[ContainerViewController alloc] initWithUrl:url];
-    [self.navigationController pushViewController:container animated:YES];
-    
-//    [self.navigationController pushViewController:self.weber animated:YES];
-    
+
+    self.container = [[ContainerViewController alloc] initWithUrl:url];
+    [self.navigationController pushViewController:self.container animated:YES];
+}
+
+
+- (void)preOpenUrl:(NSString *)url {
+    self.container = [[ContainerViewController alloc] initWithUrl:url];
 }
 
 - (void)openFEOnline {
     [self openUrl:@"http://172.17.37.51:3000/fe"];
 }
 
-- (void)openSSROnline {
-    [self openUrl:@"http://172.17.37.51:3000/ssr"];
+- (void)openProxyOffline {
+    [self preOpenUrl:@"http://172.17.37.51:3000/ssr?_speed=1"];
 }
 
-- (void)openFEOffline {
-    [self openUrl:@"http://172.17.37.51:3000/fe?_speed=1"];
+- (void)openIt {
+    [[Logger shareInstance] time];
+    
+    if (self.container) {
+        [self.navigationController pushViewController:self.container animated:YES];
+        self.container = nil;
+    }
 }
 
-- (void)openSSROffline {
-    [self openUrl:@"http://172.17.37.51:3000/ssr?_speed=1"];
+- (void)openFileOffline {
+    [self openUrl:@"test"];
+    
+//    NSURL *fileUrl = [[ResourceManage shareInstance] findFileResourceURLWithURL:[NSURL URLWithString:@"http://172.17.37.51:3000/ssr?_speed=1"]];
+    
+//    [self openUrl:[fileUrl absoluteString]];
 }
 
 - (void)cleanCache {

@@ -14,5 +14,6 @@
 
 - (void)loadResources;
 - (NSURL *)findResourceURLWithURL:(NSURL *)onlineURL;
+- (NSURL *)findFileResourceURLWithURL:(NSURL *)onlineURL;
 
 @end

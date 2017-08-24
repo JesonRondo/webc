@@ -23,8 +23,12 @@ static NSString *const HybridResourceProtocolHandledKey = @"HybridResourceProtoc
     // 只处理http和https请求
     NSString *scheme = [[request URL] scheme];
     if ([scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
-        [scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ||
-        [scheme caseInsensitiveCompare:@"file"] == NSOrderedSame) {
+        [scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+        // jsbridge不代理
+        if ([[[request URL] host] isEqualToString:@"__bridge_loaded__"]) {
+            return NO;
+        }
+        
         // 看看是否已经处理过了，防止无限循环
         if ([NSURLProtocol propertyForKey:HybridResourceProtocolHandledKey inRequest:request]) {
             return NO;
@@ -47,10 +51,10 @@ static NSString *const HybridResourceProtocolHandledKey = @"HybridResourceProtoc
 - (void)startLoading {
     NSURL *url = [[ResourceManage shareInstance] findResourceURLWithURL:[self.request URL]];
 
-    NSMutableURLRequest *newRequest = [NSMutableURLRequest requestWithURL:url];
-    newRequest.allHTTPHeaderFields = self.request.allHTTPHeaderFields;
+    NSMutableURLRequest *newRequest = [self.request mutableCopy];
+    newRequest.URL = url;
 
-    [NSURLProtocol setProperty:@YES
+    [NSURLProtocol setProperty:@(YES)
                         forKey:HybridResourceProtocolHandledKey
                      inRequest:newRequest];
     

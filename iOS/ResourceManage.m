@@ -30,7 +30,13 @@ static ResourceManage *_instance = nil;
                    completionHandler:^(NSURL * __nullable location,
                                        NSURLResponse * __nullable response,
                                        NSError * __nullable error) {
-                       if (!error) {
+                       
+                       NSHTTPURLResponse *res = (NSHTTPURLResponse *)response;
+                       NSDictionary *allHeaders = res.allHeaderFields;
+                       
+                       NSString *contentLength = (NSString *)[allHeaders objectForKey:@"Content-Length"];
+                       
+                       if (!error && [contentLength intValue] > 0) {
                            NSLog(@"> 离线资源下载完毕");
                            
                            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -51,31 +57,69 @@ static ResourceManage *_instance = nil;
                                                }
                                            }];
                            }
-                           
+                       } else {
+                           NSLog(@"> 离线资源下载失败");
                        }
                    }];
     [downloadTask resume];
 }
 
 - (NSURL *)findResourceURLWithURL:(NSURL *)onlineURL {
-    NSURL *url;
+    NSString *localPath;
+    NSString *localFile;
     NSFileManager *manager = [NSFileManager defaultManager];
-    NSURL *docPath = [[manager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+    NSURL *docUrl = [[manager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+    NSString *docPath = [docUrl path];
+    NSString *docFile = [docUrl absoluteString];
     
     // 获取本地文件
     
     // html
     if (![[onlineURL path] containsString:@"."]) {
         NSString *distFile = [NSString stringWithFormat:@"%@%@%@", @"hybrid_res/dist", [onlineURL path], @"/index.html"];
-        url = [docPath URLByAppendingPathComponent:distFile];
+        
+        localPath = [NSString stringWithFormat:@"%@/%@", docPath, distFile];
+        localFile = [NSString stringWithFormat:@"%@%@", docFile, distFile];
     } else { // 资源文件
         NSString *distFile = [NSString stringWithFormat:@"%@%@", @"hybrid_res/dist", [onlineURL path]];
-        url = [docPath URLByAppendingPathComponent:distFile];
+        localPath = [NSString stringWithFormat:@"%@/%@", docPath, distFile];
+        localFile = [NSString stringWithFormat:@"%@%@", docFile, distFile];
     }
     
-    return [manager fileExistsAtPath:[url path]]
-        ? url // 存在文件
-        : onlineURL; // 不存在文件
+    if ([manager fileExistsAtPath:localPath]) { // 存在文件
+        if ([onlineURL query]) {
+            localFile = [localFile stringByAppendingString:[NSString stringWithFormat:@"?%@", [onlineURL query]]];
+        }
+        return [NSURL URLWithString:localFile];
+    } else { // 不存在文件
+        return onlineURL;
+    }
+}
+
+- (NSURL *)findFileResourceURLWithURL:(NSURL *)onlineURL {
+    NSString *localPath;
+    NSString *localFile;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSURL *docUrl = [[manager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+    NSString *docPath = [docUrl path];
+    NSString *docFile = [docUrl absoluteString];
+    
+    // 获取本地文件
+    
+    // html
+    NSString *distFile = [NSString stringWithFormat:@"%@%@%@", @"hybrid_res/dist", [onlineURL path], @"/index_file.html"];
+        
+    localPath = [NSString stringWithFormat:@"%@/%@", docPath, distFile];
+    localFile = [NSString stringWithFormat:@"%@%@", docFile, distFile];
+
+    if ([manager fileExistsAtPath:localPath]) { // 存在文件
+        if ([onlineURL query]) {
+            localFile = [localFile stringByAppendingString:[NSString stringWithFormat:@"?%@", [onlineURL query]]];
+        }
+        return [NSURL URLWithString:localFile];
+    } else { // 不存在文件
+        return onlineURL;
+    }
 }
 
 @end

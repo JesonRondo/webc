@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <title>hihi</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    /**
+     * Mix properties into target object.
+     */
+    function extend (to, _from) {
+      if (!_from) return to
+      if (!to) to = {}
+
+      for (var key in _from) {
+        to[key] = _from[key];
+      }
+      return to
+    }
+
+    var head = document.head || document.getElementsByTagName('head')[0]
+
+    function generatorDom (node, parent) {
+      if (!node.tag && !node.text) {
+        return
+      }
+
+      if (!node.tag && node.text) {
+        // 文本节点
+        const dom = document.createTextNode(node.text)
+        parent && parent.appendChild(dom)
+        return dom
+      } else {
+        // 普通节点
+        const dom = document.createElement(node.tag)
+        parent && parent.appendChild(dom)
+
+        if (node.data) {
+          // 属性
+          if (node.data.attrs) {
+            for (let k in node.data.attrs) {
+              dom.setAttribute(k, node.data.attrs[k])
+            }
+          }
+
+          // class
+          if (node.data.staticClass) {
+            dom.setAttribute('class', node.data.staticClass)
+          }
+
+          // style
+          if (node.data.staticStyle || node.data.style) {
+            const style = extend(node.data.staticStyle, node.data.style)
+            for (let key in style) {
+              dom.style[key] = style[key]
+            }
+          }
+        }
+
+        if (node.children) {
+          node.children.forEach(child => {
+            generatorDom(child, dom)
+          })
+        }
+        return dom
+      }
+    }
+
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'http://localhost:8080') {
+        return
+      }
+
+      const cmd = e.data.cmd
+      const payload = e.data.payload
+
+      switch (cmd) {
+        case 'mount':
+          console.log(payload.tree)
+          document.getElementById('app').outerHTML = generatorDom(payload.tree).outerHTML
+          break
+
+        case 'addStyleElement':
+          var id = payload.element.id
+          var styleElement = document.createElement('style')
+          styleElement.type = 'text/css'
+          styleElement.setAttribute('id', id)
+          head.appendChild(styleElement)
+          break
+
+        case 'appendStyleNode':
+          var id = payload.element.id
+          var styleElement = document.getElementById(id)
+          var css = payload.node
+          styleElement.appendChild(document.createTextNode(css))
+          break
+
+        default:
+          console.log(cmd, payload)
+          break
+      }
+    }, false)
+  </script>
+</body>
+</html>

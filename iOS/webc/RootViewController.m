@@ -8,19 +8,16 @@
 
 #import "RootViewController.h"
 #import "ResourceManage.h"
-#import "ContainerViewController.h"
+#import "LiteAppPool.h"
 #import "Logger.h"
 #import <Masonry.h>
 #import <Toast/UIView+Toast.h>
 
 typedef enum {
-    FE_ONLINE, PROXY_OFFLINE, FILE_OFFLINE,
-    CLEAN
+    OPEN_LITE_APP
 } ClickType;
 
 @interface RootViewController ()
-
-@property(nonatomic, strong) ContainerViewController *container;
 
 @end
 
@@ -73,31 +70,9 @@ typedef enum {
     }];
     
     switch (type) {
-        case FE_ONLINE:
+        case OPEN_LITE_APP:
             [btn addTarget:self
-                    action:@selector(openFEOnline)
-          forControlEvents:UIControlEventTouchUpInside];
-            break;
-            
-        case PROXY_OFFLINE:
-            [btn addTarget:self
-                    action:@selector(openProxyOffline)
-          forControlEvents:UIControlEventTouchDown];
-            
-            [btn addTarget:self
-                    action:@selector(openIt)
-          forControlEvents:UIControlEventTouchUpInside];
-            break;
-            
-        case FILE_OFFLINE:
-            [btn addTarget:self
-                    action:@selector(openFileOffline)
-          forControlEvents:UIControlEventTouchUpInside];
-            break;
-        
-        case CLEAN:
-            [btn addTarget:self
-                    action:@selector(cleanCache)
+                    action:@selector(openLiteApp)
           forControlEvents:UIControlEventTouchUpInside];
             break;
             
@@ -107,69 +82,16 @@ typedef enum {
 }
 
 - (void)addButton {
-    // 直接打开
-    [self putButton:@"前端渲染" offsetTo:-100 WithType:FE_ONLINE];
-    [self putButton:@"代理离线" offsetTo:-25 WithType:PROXY_OFFLINE];
-    [self putButton:@"文件离线" offsetTo:50 WithType:FILE_OFFLINE];
-    // 清理缓存
-    [self putButton:@"清理缓存" offsetTo:150 WithType:CLEAN];
+    // 打开应用
+    [self putButton:@"打开应用" offsetTo:0 WithType:OPEN_LITE_APP];
 }
 
-- (void)openUrl:(NSString *)url {
-    [[Logger shareInstance] time];
-
-    self.container = [[ContainerViewController alloc] initWithUrl:url];
-    [self.navigationController pushViewController:self.container animated:YES];
-}
-
-
-- (void)preOpenUrl:(NSString *)url {
-    self.container = [[ContainerViewController alloc] initWithUrl:url];
-}
-
-- (void)openFEOnline {
-    [self openUrl:@"http://172.17.37.51:3000/fe"];
-}
-
-- (void)openProxyOffline {
-    [self preOpenUrl:@"http://172.17.37.51:3000/ssr?_speed=1"];
-}
-
-- (void)openIt {
+- (void)openLiteApp {
     [[Logger shareInstance] time];
     
-    if (self.container) {
-        [self.navigationController pushViewController:self.container animated:YES];
-        self.container = nil;
-    }
-}
-
-- (void)openFileOffline {
-    [self openUrl:@"test"];
-    
-//    NSURL *fileUrl = [[ResourceManage shareInstance] findFileResourceURLWithURL:[NSURL URLWithString:@"http://172.17.37.51:3000/ssr?_speed=1"]];
-    
-//    [self openUrl:[fileUrl absoluteString]];
-}
-
-- (void)cleanCache {
-    NSURLCache * cache = [NSURLCache sharedURLCache];
-    [cache removeAllCachedResponses];
-    [cache setDiskCapacity:0];
-    [cache setMemoryCapacity:0];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-    [fileManager removeItemAtPath:cachePath error:nil];
-    [fileManager createDirectoryAtPath:cachePath
-           withIntermediateDirectories:YES
-                            attributes:nil
-                                 error:NULL];
-
-    [self.view hideToasts];
-    [self.view makeToast:@"缓存清除成功！"
-                duration:1.5
-                position:CSToastPositionCenter];
+    [[LiteAppPool shareInstance] setNavigation:self.navigationController];
+    [[LiteAppPool shareInstance] launchAppKeyName:@"douban"
+                                       withBundle:@"http://172.17.37.51:8080/app.js"];
 }
 
 /*

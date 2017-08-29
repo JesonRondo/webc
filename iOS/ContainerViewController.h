@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@interface ContainerViewController : UIViewController<UIWebViewDelegate>
+typedef void (^evalJavaScriptBlock)(id, NSError *error);
 
-- (id)initWithUrl:(NSString *)url;
+@interface ContainerViewController : UIViewController<WKNavigationDelegate>
+
+- (id)initWithName:(NSString *)name;
+- (void)evaluateJavaScript:(NSString *)javaScriptString completionHandler:(evalJavaScriptBlock)completionHandler;
 
 @end

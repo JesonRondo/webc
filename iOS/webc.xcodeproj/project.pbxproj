@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		E59949E04C0FB0CF28924A64 /* libPods-webc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 797D7C7CCC6F6B4928B84BFD /* libPods-webc.a */; };
-		FC1C9BA01F4E973B004D6040 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = FC1C9B9F1F4E973B004D6040 /* test.html */; };
+		FC07CE6A1F53E65100ABCB06 /* WJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FC07CE691F53E65100ABCB06 /* WJSContext.m */; };
+		FC126A481F554C9900597925 /* LiteAppPool.m in Sources */ = {isa = PBXBuildFile; fileRef = FC126A471F554C9900597925 /* LiteAppPool.m */; };
 		FC214C971F4BDC66001C2626 /* ProcessLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC214C961F4BDC66001C2626 /* ProcessLineView.m */; };
 		FC2531371F4AD86C007CCBBA /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2531361F4AD86C007CCBBA /* Logger.m */; };
+		FC33321D1F53F251005A9C7A /* WTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33321A1F53F251005A9C7A /* WTimer.m */; };
+		FC3332231F5405C5005A9C7A /* framework.js in Resources */ = {isa = PBXBuildFile; fileRef = FC3332221F5405C5005A9C7A /* framework.js */; };
+		FC3332261F540E6E005A9C7A /* view.html in Resources */ = {isa = PBXBuildFile; fileRef = FC3332251F540E6E005A9C7A /* view.html */; };
+		FC3332291F540F42005A9C7A /* WBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3332281F540F42005A9C7A /* WBridge.m */; };
+		FC33322C1F5410D0005A9C7A /* MainContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33322B1F5410D0005A9C7A /* MainContainer.m */; };
 		FC4849D71F45362A004A92FC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4849D61F45362A004A92FC /* RootViewController.m */; };
 		FC8BC73F1F453488009965AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8BC73E1F453488009965AF /* main.m */; };
 		FC8BC7421F453488009965AF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8BC7411F453488009965AF /* AppDelegate.m */; };
@@ -26,11 +32,22 @@
 		339DD447CB9D5E260DE19807 /* Pods-webc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-webc.release.xcconfig"; path = "Pods/Target Support Files/Pods-webc/Pods-webc.release.xcconfig"; sourceTree = "<group>"; };
 		5820676B71342D9F3C6626F5 /* Pods-webc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-webc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-webc/Pods-webc.debug.xcconfig"; sourceTree = "<group>"; };
 		797D7C7CCC6F6B4928B84BFD /* libPods-webc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-webc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC1C9B9F1F4E973B004D6040 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		FC07CE681F53E65100ABCB06 /* WJSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJSContext.h; sourceTree = "<group>"; };
+		FC07CE691F53E65100ABCB06 /* WJSContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJSContext.m; sourceTree = "<group>"; };
+		FC126A461F554C9900597925 /* LiteAppPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiteAppPool.h; sourceTree = "<group>"; };
+		FC126A471F554C9900597925 /* LiteAppPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiteAppPool.m; sourceTree = "<group>"; };
 		FC214C951F4BDC66001C2626 /* ProcessLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessLineView.h; sourceTree = "<group>"; };
 		FC214C961F4BDC66001C2626 /* ProcessLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessLineView.m; sourceTree = "<group>"; };
 		FC2531351F4AD86C007CCBBA /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logger.h; path = webc/Logger.h; sourceTree = "<group>"; };
 		FC2531361F4AD86C007CCBBA /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logger.m; path = webc/Logger.m; sourceTree = "<group>"; };
+		FC3332191F53F251005A9C7A /* WTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTimer.h; sourceTree = "<group>"; };
+		FC33321A1F53F251005A9C7A /* WTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTimer.m; sourceTree = "<group>"; };
+		FC3332221F5405C5005A9C7A /* framework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = framework.js; path = "../../webc-framework/dist/framework.js"; sourceTree = "<group>"; };
+		FC3332251F540E6E005A9C7A /* view.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = view.html; path = ../static/view.html; sourceTree = "<group>"; };
+		FC3332271F540F42005A9C7A /* WBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBridge.h; sourceTree = "<group>"; };
+		FC3332281F540F42005A9C7A /* WBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBridge.m; sourceTree = "<group>"; };
+		FC33322A1F5410D0005A9C7A /* MainContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainContainer.h; sourceTree = "<group>"; };
+		FC33322B1F5410D0005A9C7A /* MainContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainContainer.m; sourceTree = "<group>"; };
 		FC4849D51F45362A004A92FC /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		FC4849D61F45362A004A92FC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		FC8BC73A1F453488009965AF /* webc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = webc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,10 +95,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FC07CE6B1F53E65C00ABCB06 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				FC07CE681F53E65100ABCB06 /* WJSContext.h */,
+				FC07CE691F53E65100ABCB06 /* WJSContext.m */,
+				FC3332191F53F251005A9C7A /* WTimer.h */,
+				FC33321A1F53F251005A9C7A /* WTimer.m */,
+				FC3332271F540F42005A9C7A /* WBridge.h */,
+				FC3332281F540F42005A9C7A /* WBridge.m */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+		FC3332241F5405CD005A9C7A /* bundle */ = {
+			isa = PBXGroup;
+			children = (
+				FC3332221F5405C5005A9C7A /* framework.js */,
+				FC3332251F540E6E005A9C7A /* view.html */,
+			);
+			name = bundle;
+			sourceTree = "<group>";
+		};
 		FC8BC7311F453488009965AF = {
 			isa = PBXGroup;
 			children = (
-				FC1C9B9F1F4E973B004D6040 /* test.html */,
 				FC92DC631F4A8755008F29DB /* container */,
 				FC8BC73C1F453488009965AF /* webc */,
 				FC8BC73B1F453488009965AF /* Products */,
@@ -125,12 +163,18 @@
 		FC92DC631F4A8755008F29DB /* container */ = {
 			isa = PBXGroup;
 			children = (
+				FC3332241F5405CD005A9C7A /* bundle */,
+				FC07CE6B1F53E65C00ABCB06 /* core */,
 				FCC2E5C51F4C2D1D00C17C12 /* ResourceManage.h */,
 				FCC2E5C61F4C2D1D00C17C12 /* ResourceManage.m */,
 				FC92DC641F4A87F3008F29DB /* ContainerViewController.h */,
 				FC92DC651F4A87F3008F29DB /* ContainerViewController.m */,
+				FC33322A1F5410D0005A9C7A /* MainContainer.h */,
+				FC33322B1F5410D0005A9C7A /* MainContainer.m */,
 				FC214C951F4BDC66001C2626 /* ProcessLineView.h */,
 				FC214C961F4BDC66001C2626 /* ProcessLineView.m */,
+				FC126A461F554C9900597925 /* LiteAppPool.h */,
+				FC126A471F554C9900597925 /* LiteAppPool.m */,
 				FC2531351F4AD86C007CCBBA /* Logger.h */,
 				FC2531361F4AD86C007CCBBA /* Logger.m */,
 				FCC2E5C21F4C042D00C17C12 /* HybridProtocal.h */,
@@ -201,8 +245,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC1C9BA01F4E973B004D6040 /* test.html in Resources */,
 				FC8BC74D1F453488009965AF /* LaunchScreen.storyboard in Resources */,
+				FC3332231F5405C5005A9C7A /* framework.js in Resources */,
+				FC3332261F540E6E005A9C7A /* view.html in Resources */,
 				FC8BC74A1F453488009965AF /* Assets.xcassets in Resources */,
 				FC8BC7481F453488009965AF /* Main.storyboard in Resources */,
 			);
@@ -263,14 +308,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC33322C1F5410D0005A9C7A /* MainContainer.m in Sources */,
 				FC8BC7421F453488009965AF /* AppDelegate.m in Sources */,
 				FC8BC73F1F453488009965AF /* main.m in Sources */,
 				FC92DC661F4A87F3008F29DB /* ContainerViewController.m in Sources */,
+				FC3332291F540F42005A9C7A /* WBridge.m in Sources */,
 				FC4849D71F45362A004A92FC /* RootViewController.m in Sources */,
 				FCC2E5C71F4C2D1D00C17C12 /* ResourceManage.m in Sources */,
 				FC214C971F4BDC66001C2626 /* ProcessLineView.m in Sources */,
 				FC2531371F4AD86C007CCBBA /* Logger.m in Sources */,
 				FCC2E5C41F4C042D00C17C12 /* HybridProtocal.m in Sources */,
+				FC07CE6A1F53E65100ABCB06 /* WJSContext.m in Sources */,
+				FC126A481F554C9900597925 /* LiteAppPool.m in Sources */,
+				FC33321D1F53F251005A9C7A /* WTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

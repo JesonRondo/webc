@@ -21,10 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // 注册protocol
-    [NSURLProtocol registerClass:[HybridProtocal class]];
+//    [NSURLProtocol registerClass:[HybridProtocal class]];
     
     // 下载离线资源
-    [[ResourceManage shareInstance] loadResources];
+//    [[ResourceManage shareInstance] loadResources];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

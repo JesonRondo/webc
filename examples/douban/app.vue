@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="color:#300;">
     <navigator></navigator>
     <slot></slot>
   </div>
@@ -22,7 +22,7 @@ body {
   margin: 0;
   color: #111;
   font-size: 12px;
-  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  font-family: 'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;
   position: relative;
 }
 a {

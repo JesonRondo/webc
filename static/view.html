@@ -8,55 +8,30 @@
 <body>
   <div id="app"></div>
   <script>
-    /**
-     * Mix properties into target object.
-     */
-    function extend (to, _from) {
-      if (!_from) return to
-      if (!to) to = {}
-
-      for (var key in _from) {
-        to[key] = _from[key];
-      }
-      return to
-    }
-
     var head = document.head || document.getElementsByTagName('head')[0]
 
     function generatorDom (node, parent) {
-      if (!node.tag && !node.text) {
-        return
-      }
-
-      if (!node.tag && node.text) {
+      if (node.nodeType === 3) {
         // 文本节点
         const dom = document.createTextNode(node.text)
         parent && parent.appendChild(dom)
         return dom
-      } else {
+      } else if (node.nodeType === 1) {
         // 普通节点
         const dom = document.createElement(node.tag)
         parent && parent.appendChild(dom)
 
-        if (node.data) {
-          // 属性
-          if (node.data.attrs) {
-            for (let k in node.data.attrs) {
-              dom.setAttribute(k, node.data.attrs[k])
-            }
+        // 属性
+        if (node.attrs) {
+          for (let k in node.attrs) {
+            dom.setAttribute(k, node.attrs[k])
           }
+        }
 
-          // class
-          if (node.data.staticClass) {
-            dom.setAttribute('class', node.data.staticClass)
-          }
-
-          // style
-          if (node.data.staticStyle || node.data.style) {
-            const style = extend(node.data.staticStyle, node.data.style)
-            for (let key in style) {
-              dom.style[key] = style[key]
-            }
+        // 样式
+        if (node.style) {
+          for (let key in node.style) {
+            dom.style[key] = node.style[key]
           }
         }
 
@@ -66,21 +41,15 @@
           })
         }
         return dom
+      } else if (node.nodeType === 8) {
+        // 文本节点
       }
     }
 
-    window.addEventListener('message', function (e) {
-      if (e.origin !== 'http://localhost:8080') {
-        return
-      }
-
-      const cmd = e.data.cmd
-      const payload = e.data.payload
-
+    function messageHandle (cmd, payload) {
       switch (cmd) {
         case 'mount':
-          console.log(payload.tree)
-          document.getElementById('app').outerHTML = generatorDom(payload.tree).outerHTML
+          document.getElementById('app').outerHTML = generatorDom(payload.html).outerHTML
           break
 
         case 'addStyleElement':
@@ -94,7 +63,7 @@
         case 'appendStyleNode':
           var id = payload.element.id
           var styleElement = document.getElementById(id)
-          var css = payload.node
+          var css = unescape(payload.node)
           styleElement.appendChild(document.createTextNode(css))
           break
 
@@ -102,6 +71,17 @@
           console.log(cmd, payload)
           break
       }
+    }
+
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'http://localhost:8080') {
+        return
+      }
+
+      const cmd = e.data.cmd
+      const payload = e.data.payload
+
+      messageHandle(cmd, payload)
     }, false)
   </script>
 </body>

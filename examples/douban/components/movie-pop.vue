@@ -22,7 +22,7 @@
 .interests ul {
     white-space: nowrap;
     overflow-x: auto;
-    padding: 15px 15px 43px 15px;
+    padding: 15px 15px 43px;
     font-size: 0;
     margin-left: -5px;
     -webkit-overflow-scrolling: touch;

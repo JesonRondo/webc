@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="color:#300;">
+  <div id="app" style="color:#300;background:#fff">
     <navigator></navigator>
     <slot></slot>
   </div>

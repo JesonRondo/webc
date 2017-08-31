@@ -23,18 +23,20 @@
     margin-left: .94rem;
 }
 .type-list {
+    width: 100%;
     padding: 1.12rem 0 1.88rem;
     color: #eee;
     font-size: .9rem;
     overflow: hidden;
 }
 .type-list li {
-    width: 41.5%;
+    width: 49%;
     border-top: solid 1px #eee;
     border-right: solid 1px #eee;
     float: left;
     padding-right: 1.12rem;
     height: 2.64rem;
+    box-sizing: border-box;
 }
 .type-list a {
     float: left;

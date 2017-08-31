@@ -51,17 +51,15 @@ static ContainerViewController *_backInstance = nil;
         self.loaded = NO;
         self.execQueue = [[NSMutableArray alloc] init];
         
+        NSURL *viewURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"view"
+                                                                                ofType:@"html"]];
+        NSString *viewHTMLContent = [self contentsOfFile:@"view" ofType:@"html"];
+        
         self.webview = [[WKWebView alloc] init];
+        self.webview.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
         self.webview.navigationDelegate = self;
-        
-        NSString *viewPath = [[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"];
-        NSURL *viewURL = [NSURL fileURLWithPath:viewPath];
-        NSString *viewHTMLContent = [NSString stringWithContentsOfURL:viewURL
-                                                             encoding:NSUTF8StringEncoding
-                                                                error:nil];
-        
+
         [self.webview loadHTMLString:viewHTMLContent baseURL:viewURL];
-//        [self.webview loadFileURL:viewURL allowingReadAccessToURL:viewURL];
     }
     return self;
 }
@@ -104,6 +102,16 @@ static ContainerViewController *_backInstance = nil;
 //                         handler:^(id data, WVJBResponseCallback responseCallback) {
 //                             [[Logger shareInstance] timeEnd];
 //                         }];
+}
+
+- (NSString *)contentsOfFile:(NSString *)file ofType:(NSString *)type {
+    NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:type];
+    NSURL *url = [NSURL fileURLWithPath:path];
+
+    NSString *content = [NSString stringWithContentsOfURL:url
+                                                 encoding:NSUTF8StringEncoding
+                                                    error:nil];
+    return content;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,7 +177,7 @@ static ContainerViewController *_backInstance = nil;
                    strongSelf.navigationItem.title = result;
                }
            }];
-    
+
     self.loaded = YES;
     
     for (int i = 0; i < [self.execQueue count]; i++) {

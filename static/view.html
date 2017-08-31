@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
@@ -8,81 +8,92 @@
 <body>
   <div id="app"></div>
   <script>
-    var head = document.head || document.getElementsByTagName('head')[0]
+    window.viewKit = (function () {
+      var head
 
-    function generatorDom (node, parent) {
-      if (node.nodeType === 3) {
-        // 文本节点
-        const dom = document.createTextNode(node.text)
-        parent && parent.appendChild(dom)
-        return dom
-      } else if (node.nodeType === 1) {
-        // 普通节点
-        const dom = document.createElement(node.tag)
-        parent && parent.appendChild(dom)
+      var getHead = function () {
+        return head || (head = document.head || document.getElementsByTagName('head')[0])
+      }
 
-        // 属性
-        if (node.attrs) {
-          for (let k in node.attrs) {
-            dom.setAttribute(k, node.attrs[k])
+      var generatorDom = function (node, parent) {
+        var dom
+
+        if (node.type === 'text') {
+          // 文本节点
+          dom = document.createTextNode(node.data)
+          parent && parent.appendChild(dom)
+          return dom
+        // } else if (node.nodeType === 8) {
+          // 注释节点
+        } else if (node.type === 'tag') {
+          // 普通节点
+          dom = document.createElement(node.name)
+          parent && parent.appendChild(dom)
+
+          // 属性
+          if (node.attribs) {
+            for (var k in node.attribs) {
+              dom.setAttribute(k, node.attribs[k])
+            }
           }
-        }
 
-        // 样式
-        if (node.style) {
-          for (let key in node.style) {
-            dom.style[key] = node.style[key]
+          // 孩子
+          if (node.children) {
+            node.children.forEach(function (child) {
+              generatorDom(child, dom)
+            })
           }
+          return dom
+        }
+      }
+
+      var messageHandle = function (cmd, payload) {
+        var id, styleElement
+
+        switch (cmd) {
+          case 'mount':
+            const node = typeof payload.html === 'string'
+              ? JSON.parse(payload.html)
+              : payload.html
+            document.getElementById('app').outerHTML = generatorDom(node).outerHTML
+            break
+
+          case 'addStyleElement':
+            id = payload.element.id
+            styleElement = document.createElement('style')
+            styleElement.type = 'text/css'
+            styleElement.setAttribute('id', id)
+            getHead().appendChild(styleElement)
+            break
+
+          case 'appendStyleNode':
+            id = payload.element.id
+            styleElement = document.getElementById(id)
+            var css = unescape(payload.node)
+            styleElement.appendChild(document.createTextNode(css))
+            break
+
+          default:
+            console.log(cmd, payload)
+            break
+        }
+      }
+
+      window.addEventListener('message', function (e) {
+        if (e.origin !== 'http://localhost:8080') {
+          return
         }
 
-        if (node.children) {
-          node.children.forEach(child => {
-            generatorDom(child, dom)
-          })
-        }
-        return dom
-      } else if (node.nodeType === 8) {
-        // 文本节点
+        var cmd = e.data.cmd
+        var payload = e.data.payload
+
+        messageHandle(cmd, payload)
+      }, false)
+
+      return {
+        messageHandle: messageHandle
       }
-    }
-
-    function messageHandle (cmd, payload) {
-      switch (cmd) {
-        case 'mount':
-          document.getElementById('app').outerHTML = generatorDom(payload.html).outerHTML
-          break
-
-        case 'addStyleElement':
-          var id = payload.element.id
-          var styleElement = document.createElement('style')
-          styleElement.type = 'text/css'
-          styleElement.setAttribute('id', id)
-          head.appendChild(styleElement)
-          break
-
-        case 'appendStyleNode':
-          var id = payload.element.id
-          var styleElement = document.getElementById(id)
-          var css = unescape(payload.node)
-          styleElement.appendChild(document.createTextNode(css))
-          break
-
-        default:
-          console.log(cmd, payload)
-          break
-      }
-    }
-
-    window.addEventListener('message', function (e) {
-      if (e.origin !== 'http://localhost:8080') {
-        return
-      }
-
-      const cmd = e.data.cmd
-      const payload = e.data.payload
-
-      messageHandle(cmd, payload)
-    }, false)
+    })()
   </script>
 </body>
 </html>

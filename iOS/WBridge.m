@@ -27,7 +27,7 @@
 
 - (void)sendCmd:(NSString *)cmd data:(NSString *)data toTarget:(NSString *)target {
     ContainerViewController *vc = [self.viewVCs objectForKey:target];
-    [vc evaluateJavaScript:[NSString stringWithFormat:@"messageHandle('%@', %@)", cmd, data]
+    [vc evaluateJavaScript:[NSString stringWithFormat:@"viewKit.messageHandle('%@', %@)", cmd, data]
          completionHandler:^(id result, NSError *error) {
              if (error) {
                  NSLog(@"%@", error);
@@ -65,12 +65,12 @@
     return ^(JSValue *cmd, JSValue *data, JSValue *callback) {
         NSString *command = [cmd toString];
         
-        if ([command isEqualToString:@"navigation.openView"]) {
+        if ([command isEqualToString:@"navigation.push"]) {
             NSDictionary *payload = [data toDictionary];
             
             if ([self.delegate respondsToSelector:@selector(openViewWithName:)]) {
-                [self.viewVCs setObject:[self.delegate openViewWithName:payload[@"id"]]
-                                 forKey:payload[@"id"]];
+                [self.viewVCs setObject:[self.delegate openViewWithName:payload[@"path"]]
+                                 forKey:payload[@"path"]];
             }
 
             return;

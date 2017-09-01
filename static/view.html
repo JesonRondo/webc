@@ -9,53 +9,290 @@
   <div id="app"></div>
   <script>
     window.viewKit = (function () {
-      var head
+      var head, rootVnode = null
+
+      function isUndef (v) {
+        return v === undefined || v === null
+      }
+
+      function isDef (v) {
+        return v !== undefined && v !== null
+      }
+
+      function isTrue (v) {
+        return v === true
+      }
+
+      function isFalse (v) {
+        return v === false
+      }
+
+      function isPrimitive (value) {
+        return (
+          typeof value === 'string' ||
+          typeof value === 'number' ||
+          typeof value === 'boolean'
+        )
+      }
 
       var getHead = function () {
         return head || (head = document.head || document.getElementsByTagName('head')[0])
       }
 
       var generatorDom = function (node, parent) {
-        var dom
-
         if (node.type === 'text') {
           // 文本节点
-          dom = document.createTextNode(node.data)
-          parent && parent.appendChild(dom)
-          return dom
+          node.elm = document.createTextNode(node.data)
+          parent && parent.elm && parent.elm.appendChild(node.elm)
+          return node
         // } else if (node.nodeType === 8) {
           // 注释节点
         } else if (node.type === 'tag') {
           // 普通节点
-          dom = document.createElement(node.name)
-          parent && parent.appendChild(dom)
+          node.elm = document.createElement(node.name)
+          parent && parent.elm && parent.elm.appendChild(node.elm)
 
           // 属性
           if (node.attribs) {
             for (var k in node.attribs) {
-              dom.setAttribute(k, node.attribs[k])
+              node.elm.setAttribute(k, node.attribs[k])
             }
           }
 
           // 孩子
           if (node.children) {
             node.children.forEach(function (child) {
-              generatorDom(child, dom)
+              generatorDom(child, node)
             })
           }
-          return dom
+          return node
         }
       }
 
+      function sameVnode (a, b) {
+        return (
+          a.key === b.key && (
+            (a.type === 'text' && b.type === 'text' && a.data === b.data) ||
+            (a.type === 'comment' && b.type === 'comment' && a.data === b.data) ||
+            (
+              a.type === b.type &&
+              a.name === b.name &&
+              isDef(a.attribs) === isDef(b.attribs)
+            )
+          )
+        )
+      }
+
+      // children diff
+      function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
+        let oldStartIdx = 0
+        let newStartIdx = 0
+        let oldEndIdx = oldCh.length - 1
+        let oldStartVnode = oldCh[0]
+        let oldEndVnode = oldCh[oldEndIdx]
+        let newEndIdx = newCh.length - 1
+        let newStartVnode = newCh[0]
+        let newEndVnode = newCh[newEndIdx]
+        let oldKeyToIdx, idxInOld, elmToMove, refElm
+
+        // removeOnly is a special flag used only by <transition-group>
+        // to ensure removed elements stay in correct relative positions
+        // during leaving transitions
+        const canMove = !removeOnly
+
+        while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+          if (isUndef(oldStartVnode)) {
+            oldStartVnode = oldCh[++oldStartIdx] // Vnode has been moved left
+          } else if (isUndef(oldEndVnode)) {
+            oldEndVnode = oldCh[--oldEndIdx]
+          } else if (sameVnode(oldStartVnode, newStartVnode)) {
+            patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue)
+            oldStartVnode = oldCh[++oldStartIdx]
+            newStartVnode = newCh[++newStartIdx]
+          } else if (sameVnode(oldEndVnode, newEndVnode)) {
+            patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue)
+            oldEndVnode = oldCh[--oldEndIdx]
+            newEndVnode = newCh[--newEndIdx]
+          } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
+            patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue)
+            canMove && parentElm.insertBefore(oldStartVnode.elm, oldEndVnode.elm.nextSibling)
+            oldStartVnode = oldCh[++oldStartIdx]
+            newEndVnode = newCh[--newEndIdx]
+          } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
+            patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue)
+            canMove && parentElm.insertBefore(oldEndVnode.elm, oldStartVnode.elm)
+            oldEndVnode = oldCh[--oldEndIdx]
+            newStartVnode = newCh[++newStartIdx]
+          } else {
+            if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)
+            idxInOld = isDef(newStartVnode.key) ? oldKeyToIdx[newStartVnode.key] : null
+            if (isUndef(idxInOld)) { // New element
+              createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm)
+              newStartVnode = newCh[++newStartIdx]
+            } else {
+              elmToMove = oldCh[idxInOld]
+              if (sameVnode(elmToMove, newStartVnode)) {
+                patchVnode(elmToMove, newStartVnode, insertedVnodeQueue)
+                oldCh[idxInOld] = undefined
+                canMove && parentElm.insertBefore(elmToMove.elm, oldStartVnode.elm)
+                newStartVnode = newCh[++newStartIdx]
+              } else {
+                // same key but different element. treat as new element
+                createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm)
+                newStartVnode = newCh[++newStartIdx]
+              }
+            }
+          }
+        }
+        if (oldStartIdx > oldEndIdx) {
+          refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm
+          addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
+        } else if (newStartIdx > newEndIdx) {
+          removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
+        }
+      }
+
+      function insert (parent, elm, ref) {
+        if (isDef(parent)) {
+          if (isDef(ref)) {
+            if (ref.parentNode === parent) {
+              parent.insertBefore(elm, ref)
+            }
+          } else {
+            parent.appendChild(elm)
+          }
+        }
+      }
+
+      function createChildren (vnode, children, insertedVnodeQueue) {
+        if (Array.isArray(children)) {
+          for (let i = 0; i < children.length; ++i) {
+            createElm(children[i], insertedVnodeQueue, vnode.elm, null, true)
+          }
+        } else if (isPrimitive(vnode.data)) {
+          vnode.elm.appendChild(document.createTextNode(vnode.data))
+        }
+      }
+
+      function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
+        const attribs = vnode.attribs
+        const children = vnode.children
+        const tag = vnode.name
+        if (isDef(tag)) {
+          vnode.elm = document.createElement(tag)
+
+          /* istanbul ignore if */
+          createChildren(vnode, children, insertedVnodeQueue)
+          // 设置属性
+          if (isDef(attribs)) {
+            for (var k in attribs) {
+              vnode.elm.setAttribute(k, attribs[k])
+            }
+          }
+          insert(parentElm, vnode.elm, refElm)
+        } else if (vnode.type === 'comment') {
+          vnode.elm = document.createComment(vnode.data)
+          insert(parentElm, vnode.elm, refElm)
+        } else {
+          vnode.elm = document.createTextNode(vnode.data)
+          insert(parentElm, vnode.elm, refElm)
+        }
+      }
+
+      function addVnodes (parentElm, refElm, vnodes, startIdx, endIdx, insertedVnodeQueue) {
+        for (; startIdx <= endIdx; ++startIdx) {
+          createElm(vnodes[startIdx], insertedVnodeQueue, parentElm, refElm)
+        }
+      }
+
+      function removeNode (el) {
+        const parent = el.parentNode
+        // element may have already been removed due to v-html / v-text
+        if (isDef(parent)) {
+          parent.removeChild(el)
+        }
+      }
+
+      function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
+        for (; startIdx <= endIdx; ++startIdx) {
+          const ch = vnodes[startIdx]
+          if (isDef(ch)) {
+            removeNode(ch.elm)
+          }
+        }
+      }
+
+      // diff
+      function patchVnode (oldVnode, vnode, insertedVnodeQueue, removeOnly) {
+        if (oldVnode === vnode) {
+          return
+        }
+
+        const elm = vnode.elm = oldVnode.elm
+
+        const oldCh = oldVnode.children
+        const ch = vnode.children
+        if (isUndef(vnode.data)) {
+          if (isDef(oldCh) && isDef(ch)) {
+            if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
+          } else if (isDef(ch)) {
+            if (isDef(oldVnode.data)) elm.textContent = ''
+            addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+          } else if (isDef(oldCh)) {
+            removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+          } else if (isDef(oldVnode.data)) {
+            elm.textContent = ''
+          }
+        } else if (oldVnode.data !== vnode.data) {
+          elm.textContent = vnode.data
+        }
+      }
+
+      // patch
+      function patch (oldVnode, vnode, removeOnly, parentElm, refElm) {
+        if (isUndef(vnode)) {
+          return
+        }
+
+        let isInitialPatch = false
+        const insertedVnodeQueue = []
+
+        if (isUndef(oldVnode)) {
+          isInitialPatch = true
+          createElm(vnode, insertedVnodeQueue, parentElm.parentNode, refElm)
+          parentElm.remove()
+        } else {
+          if (sameVnode(oldVnode, vnode)) {
+            // patch existing root node
+            patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)
+          } else {
+            // replacing existing element
+            const oldElm = oldVnode.elm
+            const parentElm = oldElm.parentNode
+            createElm(
+              vnode,
+              insertedVnodeQueue,
+              parentElm,
+              oldElm.nextSibling
+            )
+
+            if (isDef(parentElm)) {
+              removeVnodes(parentElm, [oldVnode], 0, 0)
+            }
+          }
+        }
+        return vnode
+      }
+
       var messageHandle = function (cmd, payload) {
-        var id, styleElement
+        var id, styleElement, node
 
         switch (cmd) {
-          case 'mount':
-            const node = typeof payload.html === 'string'
+          case 'patch':
+            node = typeof payload.html === 'string'
               ? JSON.parse(payload.html)
               : payload.html
-            document.getElementById('app').outerHTML = generatorDom(node).outerHTML
+            rootVnode = patch(rootVnode, node, false, document.getElementById('app'))
             break
 
           case 'addStyleElement':

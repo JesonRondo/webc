@@ -65,7 +65,7 @@
     return ^(JSValue *cmd, JSValue *data, JSValue *callback) {
         NSString *command = [cmd toString];
         
-        if ([command isEqualToString:@"navigation.push"]) {
+        if ([command isEqualToString:@"navigate.push"]) {
             NSDictionary *payload = [data toDictionary];
             
             if ([self.delegate respondsToSelector:@selector(openViewWithName:)]) {

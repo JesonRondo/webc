@@ -71,7 +71,7 @@
 }
 .TalionNav-primary nav li {
     font-size: 15px;
-    margin-right: 19px;
+    margin-right: 16px;
 }
 .TalionNav-primary nav>*, .TalionNav-primary nav li {
     display: inline-block;

@@ -21,8 +21,6 @@ import MovieLight from '@/components/movie-light'
 import MoviePop from '@/components/movie-pop'
 import MovieCate from '@/components/movie-cate'
 
-// import jsonp from 'jsonp'
-
 export default {
   components: {
     MovieLight, MoviePop, MovieCate
@@ -72,14 +70,21 @@ export default {
     fetchData () {
       this.lights.forEach((light, index) => {
         ((light, i) => {
-          // jsonp(light.source, {
-          //   param: 'start=0&count=8&loc_id=108288&callback'
-          // }, (err, data) => {
-          //   const lightMovies = this.lightMovies
-          //   lightMovies[i] = data.subject_collection_items
-
-          //   Vue.set(this.lightMovies, lightMovies)
-          // })
+          webc.request({
+            url: light.source,
+            data: {
+              start: 0,
+              count: 8,
+              loc_id: 108288
+            },
+            success: data => {
+              if (data.statusCode === 200) {
+                const lightMovies = this.lightMovies
+                lightMovies[i] = data.data.subject_collection_items
+                Vue.set(this.lightMovies, lightMovies)
+              }
+            }
+          })
         })(light, index)
       })
     }

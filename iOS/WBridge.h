@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "ContainerViewController.h"
 
 @protocol WBridgeDelegate <NSObject>
 
 - (ContainerViewController *)openViewWithName:(NSString *)name;
+- (JSContext *)coreContext;
 
 @end
 

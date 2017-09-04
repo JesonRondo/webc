@@ -35,6 +35,23 @@
         )
       }
 
+      /**
+       * Make a map and return a function for checking if a key
+       * is in that map.
+       */
+      function makeMap (str, expectsLowerCase) {
+        var map = Object.create(null)
+        var list = str.split(',')
+        for (var i = 0; i < list.length; i++) {
+          map[list[i]] = true
+        }
+        return expectsLowerCase
+          ? function (val) { return map[val.toLowerCase()] }
+          : function (val) { return map[val] }
+      }
+
+      var isEnumeratedAttr = makeMap('contenteditable,draggable,spellcheck')
+
       var getHead = function () {
         return head || (head = document.head || document.getElementsByTagName('head')[0])
       }
@@ -83,22 +100,32 @@
         )
       }
 
+      function createKeyToOldIdx (children, beginIdx, endIdx) {
+        var i, key
+        var map = {}
+        for (i = beginIdx; i <= endIdx; ++i) {
+          key = children[i].key
+          if (isDef(key)) map[key] = i
+        }
+        return map
+      }
+
       // children diff
       function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
-        let oldStartIdx = 0
-        let newStartIdx = 0
-        let oldEndIdx = oldCh.length - 1
-        let oldStartVnode = oldCh[0]
-        let oldEndVnode = oldCh[oldEndIdx]
-        let newEndIdx = newCh.length - 1
-        let newStartVnode = newCh[0]
-        let newEndVnode = newCh[newEndIdx]
-        let oldKeyToIdx, idxInOld, elmToMove, refElm
+        var oldStartIdx = 0
+        var newStartIdx = 0
+        var oldEndIdx = oldCh.length - 1
+        var oldStartVnode = oldCh[0]
+        var oldEndVnode = oldCh[oldEndIdx]
+        var newEndIdx = newCh.length - 1
+        var newStartVnode = newCh[0]
+        var newEndVnode = newCh[newEndIdx]
+        var oldKeyToIdx, idxInOld, elmToMove, refElm
 
         // removeOnly is a special flag used only by <transition-group>
         // to ensure removed elements stay in correct relative positions
         // during leaving transitions
-        const canMove = !removeOnly
+        var canMove = !removeOnly
 
         while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
           if (isUndef(oldStartVnode)) {
@@ -166,7 +193,7 @@
 
       function createChildren (vnode, children, insertedVnodeQueue) {
         if (Array.isArray(children)) {
-          for (let i = 0; i < children.length; ++i) {
+          for (var i = 0; i < children.length; ++i) {
             createElm(children[i], insertedVnodeQueue, vnode.elm, null, true)
           }
         } else if (isPrimitive(vnode.data)) {
@@ -175,9 +202,9 @@
       }
 
       function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
-        const attribs = vnode.attribs
-        const children = vnode.children
-        const tag = vnode.name
+        var attribs = vnode.attribs
+        var children = vnode.children
+        var tag = vnode.name
         if (isDef(tag)) {
           vnode.elm = document.createElement(tag)
 
@@ -206,7 +233,7 @@
       }
 
       function removeNode (el) {
-        const parent = el.parentNode
+        var parent = el.parentNode
         // element may have already been removed due to v-html / v-text
         if (isDef(parent)) {
           parent.removeChild(el)
@@ -215,7 +242,7 @@
 
       function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
         for (; startIdx <= endIdx; ++startIdx) {
-          const ch = vnodes[startIdx]
+          var ch = vnodes[startIdx]
           if (isDef(ch)) {
             removeNode(ch.elm)
           }
@@ -228,10 +255,30 @@
           return
         }
 
-        const elm = vnode.elm = oldVnode.elm
+        var elm = vnode.elm = oldVnode.elm
 
-        const oldCh = oldVnode.children
-        const ch = vnode.children
+        var oldCh = oldVnode.children
+        var ch = vnode.children
+
+        // update attribs
+        var oldAttrs = oldVnode.attribs || {}
+        var attrs = vnode.attribs || {}
+
+        for (key in attrs) {
+          cur = attrs[key]
+          old = oldAttrs[key]
+          if (old !== cur) {
+            elm.setAttribute(key, cur)
+          }
+        }
+        for (key in oldAttrs) {
+          if (isUndef(attrs[key])) {
+            if (!isEnumeratedAttr(key)) {
+              elm.removeAttribute(key)
+            }
+          }
+        }
+
         if (isUndef(vnode.data)) {
           if (isDef(oldCh) && isDef(ch)) {
             if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
@@ -254,8 +301,8 @@
           return
         }
 
-        let isInitialPatch = false
-        const insertedVnodeQueue = []
+        var isInitialPatch = false
+        var insertedVnodeQueue = []
 
         if (isUndef(oldVnode)) {
           isInitialPatch = true
@@ -267,8 +314,8 @@
             patchVnode(oldVnode, vnode, insertedVnodeQueue, removeOnly)
           } else {
             // replacing existing element
-            const oldElm = oldVnode.elm
-            const parentElm = oldElm.parentNode
+            var oldElm = oldVnode.elm
+            var parentElm = oldElm.parentNode
             createElm(
               vnode,
               insertedVnodeQueue,

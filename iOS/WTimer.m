@@ -10,14 +10,14 @@
 @implementation WTimer {
     NSUInteger _timeoutCounter;
     dispatch_queue_t _queue;
-    NSMapTable *_dispatchSourcesMapping;
+    NSMutableDictionary *_dispatchSourcesMapping;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
         _timeoutCounter = 0;
         _queue = dispatch_get_main_queue();
-        _dispatchSourcesMapping = [NSMapTable weakToWeakObjectsMapTable];
+        _dispatchSourcesMapping =  [[NSMutableDictionary alloc] init];
         self.tolerance = 10;
     }
     return self;
@@ -55,7 +55,6 @@
                               self.tolerance * NSEC_PER_MSEC);
     dispatch_resume(dispatchSource);
     [_dispatchSourcesMapping setObject:dispatchSource forKey:timeoutID];
-    
     return timeoutID;
 }
 

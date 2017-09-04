@@ -75,4 +75,8 @@
     return nil;
 }
 
+- (JSContext *)coreContext {
+    return self.context;
+}
+
 @end

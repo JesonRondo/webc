@@ -12,23 +12,21 @@ import App from './app'
 import Page from '@/pages/home'
 
 const isWebDebug = navigator.userAgent.indexOf('WebC') < 0
-let isMounted = false
 
 Vue.config.productionTip = false
 
-function changeSign (el) {
-  if (!isMounted) return
-  if (el.getAttribute('_changed')) return
-
-  el.setAttribute('_changed', true)
-  if (el.parentNode && !el.parentNode.getAttribute('_changed')) {
-    changeSign(el.parentNode)
-  }
-  window.__update()
-}
-
 if (isWebDebug) {
   window.webc = bridgeMock
+
+  const changeSign = function (el) {
+    if (el.getAttribute('_changed')) return
+
+    el.setAttribute('_changed', true)
+    if (el.parentNode && !el.parentNode.getAttribute('_changed')) {
+      changeSign(el.parentNode)
+    }
+    window.__update()
+  }
 
   document.$createElement = document.createElement
   document.createElement = function () {
@@ -67,34 +65,26 @@ if (isWebDebug) {
   }
 }
 
-webc.navigate.push('home')
+let __updateTimer = 0
+window.__update = function () {
+  clearTimeout(__updateTimer)
+  __updateTimer = setTimeout(() => {
+    const el = isWebDebug
+      ? htmlparser(instance.$el.outerHTML)[0]
+      : instance.$el
 
+    const liteEl = formatEl(el)
+    webc.nodeOpt.patch('home', JSON.stringify(liteEl))
+  }, 16)
+}
+
+webc.navigate.push('home')
 const instance = new Vue({
   el: document.createElement('div'),
   template: '<App><Page></Page></App>',
   components: { App, Page }
 }).$mount()
-
-isMounted = true
-
-let __updateTimer = 0
-window.__update = function () {
-  clearTimeout(__updateTimer)
-  __updateTimer = setTimeout(() => {
-    let liteEl = isWebDebug
-      ? htmlparser(instance.$el.outerHTML)[0]
-      : instance.$el
-
-    formatEl(liteEl)
-    console.log(liteEl)
-    webc.nodeOpt.patch('home', JSON.stringify(liteEl))
-  }, 16)
-}
-
-const cleanMap = [
-  'next', 'parent', 'prev',
-  '__vue__', '_prevClass', 'nodeType'
-]
+window.instance = instance
 
 function isEmptyObj (obj) {
   for (let o in obj) {
@@ -104,11 +94,18 @@ function isEmptyObj (obj) {
 }
 
 function formatEl (el) {
-  cleanMap.forEach(prop => {
-    delete el[prop]
-  })
+  const liteEl = {}
 
-  // prod style is in mock style [CSSStyleDeclaration]
+  // attr
+  liteEl.attribs = el.attribs || {}
+
+  // changed
+  if (liteEl.attribs._changed) {
+    liteEl.changed = true
+    delete liteEl.attribs._changed
+  }
+
+  // style
   if (el.style) {
     const _style = el.style._style
     if (!isEmptyObj(_style)) {
@@ -116,29 +113,32 @@ function formatEl (el) {
       for (let k in _style) {
         styles.push(`${hyphenate(k)}:${_style[k]}`)
       }
-
-      el.attribs = el.attribs || {}
-      el.attribs.style = styles.join(';')
+      liteEl.attribs.style = styles.join(';')
     }
-    delete el.style
   }
 
-  if (el.attribs && el.attribs._changed) {
-    el.changed = true
-    delete el.attribs._changed
+  // name
+  if (el.name) {
+    liteEl.name = el.name
   }
 
+  // type
+  if (el.type) {
+    liteEl.type = el.type
+  }
+
+  // data
+  if (el.data) {
+    liteEl.data = el.data
+  }
+
+  // children
   if (el.children) {
+    liteEl.children = []
     el.children.forEach(child => {
-      formatEl(child)
+      liteEl.children.push(formatEl(child))
     })
   }
+
+  return liteEl
 }
-
-let liteEl = isWebDebug
-  ? htmlparser(instance.$el.outerHTML)[0]
-  : instance.$el
-
-formatEl(liteEl)
-
-webc.nodeOpt.patch('home', JSON.stringify(liteEl))

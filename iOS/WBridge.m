@@ -8,7 +8,7 @@
 //
 
 #import "WBridge.h"
-#import <JavaScriptCore/JavaScriptCore.h>
+#import <AFNetworking.h>
 
 @interface WBridge ()
 
@@ -106,16 +106,50 @@
             return;
         }
         
-        if ([command isEqualToString:@"nodeOpt.mount"]) {
+        if ([command isEqualToString:@"nodeOpt.patch"]) {
             NSDictionary *payload = [data toDictionary];
             
             NSString *target = [payload objectForKey:@"target"];
             NSString *html = [payload objectForKey:@"html"];
             
-            [self sendCmd:@"mount"
+            [self sendCmd:@"patch"
                      data:[NSString stringWithFormat:@"{html: %@}", html]
                  toTarget:target];
             
+            return;
+        }
+        
+        if ([command isEqualToString:@"request"]) {
+            NSDictionary *payload = [data toDictionary];
+            NSDictionary *opts = [payload objectForKey:@"opts"];
+            
+            NSString *url = [opts objectForKey:@"url"];
+            NSString *method = [opts objectForKey:@"method"];
+//            NSString *dataType = [opts objectForKey:@"dataType"];
+            
+            if ([method isEqualToString:@"GET"]) {
+                AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+                [manager GET:url parameters:nil progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+                    NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                    
+                    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+                    [result setObject:[NSNumber numberWithInteger:response.statusCode]
+                               forKey:@"statusCode"];
+                    [result setObject:(NSDictionary *)responseObject
+                               forKey:@"data"];
+                    [result setObject:response.allHeaderFields
+                               forKey:@"header"];
+
+                    JSContext *ctx = [self.delegate coreContext];
+                    
+                    [callback callWithArguments:@[
+                                                  [JSValue valueWithUndefinedInContext:ctx],
+                                                  result
+                                                  ]];
+                } failure:^(NSURLSessionTask *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }];
+            }
             return;
         }
     };

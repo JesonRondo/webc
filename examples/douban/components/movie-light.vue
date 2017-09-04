@@ -6,6 +6,15 @@
     </section-title>
     <div class="section-content">
       <ul class="row items">
+        <li class="item item__movie"
+          v-if="!movies || movies.length <= 0"
+          v-for="i of 5">
+          <a href="javascript:;">
+            <div class="item-poster" :style="{
+              'background-color': `#f1f1f1`
+              }"></div>
+          </a>
+        </li>
         <li class="item item__movie" v-for="movie of movies"
           :key="movie.key">
           <a href="javascript:;">
@@ -61,6 +70,7 @@ section .section-content {
     display: inline-block;
     vertical-align: top;
     width: 100px;
+    height: 182px;
     text-align: center;
 }
 .items>* {

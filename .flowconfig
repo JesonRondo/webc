@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/.*
+.*/examples/.*
+.*/build/.*
+
+[include]
+src/.*
+
+[libs]
+flow
+
+[lints]
+
+[options]
+
+module.name_mapper='^util\/\(.*\)$' -> '<PROJECT_ROOT>/src/util/\1'

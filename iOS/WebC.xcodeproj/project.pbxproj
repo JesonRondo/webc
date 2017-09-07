@@ -1,0 +1,533 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43B0F71D6C99EAB37617E225 /* libPods-WebC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0C0EE7E5E1A297A2FB5B053 /* libPods-WebC.a */; };
+		FC4300D11F60CFC300408ED5 /* WebCJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D01F60CFC300408ED5 /* WebCJSBridge.m */; };
+		FC4300D41F60CFFB00408ED5 /* WebCJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D31F60CFFB00408ED5 /* WebCJSContext.m */; };
+		FC4300D71F60D00600408ED5 /* WebCAppCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D61F60D00600408ED5 /* WebCAppCore.m */; };
+		FC4300DB1F60DB9600408ED5 /* WebCJSPluginManage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */; };
+		FC4300ED1F6108E800408ED5 /* jsbridge.js in Resources */ = {isa = PBXBuildFile; fileRef = FC4300EC1F6108E800408ED5 /* jsbridge.js */; };
+		FC4300F31F6121D600408ED5 /* WebCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300F21F6121D600408ED5 /* WebCNetwork.m */; };
+		FC4300F81F6121E200408ED5 /* WebCPluginLog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300F51F6121E200408ED5 /* WebCPluginLog.m */; };
+		FC4300F91F6121E200408ED5 /* WebCPluginNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300F71F6121E200408ED5 /* WebCPluginNavigation.m */; };
+		FC4300FC1F6121EE00408ED5 /* WebCPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */; };
+		FC4301031F612F4D00408ED5 /* WebCUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4301021F612F4D00408ED5 /* WebCUIViewController.m */; };
+		FC4301061F612FE900408ED5 /* WebCViewManage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4301051F612FE900408ED5 /* WebCViewManage.m */; };
+		FC551CDC1F5FF58400C5466F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CDB1F5FF58400C5466F /* main.m */; };
+		FC551CDF1F5FF58400C5466F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CDE1F5FF58400C5466F /* AppDelegate.m */; };
+		FC551CE51F5FF58400C5466F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC551CE31F5FF58400C5466F /* Main.storyboard */; };
+		FC551CE71F5FF58400C5466F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC551CE61F5FF58400C5466F /* Assets.xcassets */; };
+		FC551CEA1F5FF58400C5466F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC551CE81F5FF58400C5466F /* LaunchScreen.storyboard */; };
+		FC551CF31F5FF79C00C5466F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CF21F5FF79C00C5466F /* RootViewController.m */; };
+		FC551CF71F5FF9E300C5466F /* WebCAppManage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CF61F5FF9E300C5466F /* WebCAppManage.m */; };
+		FC551CFF1F5FFE2300C5466F /* framework.js in Resources */ = {isa = PBXBuildFile; fileRef = FC551CFD1F5FFE2200C5466F /* framework.js */; };
+		FC551D001F5FFE2300C5466F /* vue.js in Resources */ = {isa = PBXBuildFile; fileRef = FC551CFE1F5FFE2200C5466F /* vue.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7849F4BC9F240F72ED67CCBC /* Pods-WebC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebC.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebC/Pods-WebC.release.xcconfig"; sourceTree = "<group>"; };
+		78C2BE6A88D3A8A743E47CE1 /* Pods-WebC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebC/Pods-WebC.debug.xcconfig"; sourceTree = "<group>"; };
+		A0C0EE7E5E1A297A2FB5B053 /* libPods-WebC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WebC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4300CF1F60CFC300408ED5 /* WebCJSBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCJSBridge.h; path = Core/WebCJSBridge.h; sourceTree = "<group>"; };
+		FC4300D01F60CFC300408ED5 /* WebCJSBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCJSBridge.m; path = Core/WebCJSBridge.m; sourceTree = "<group>"; };
+		FC4300D21F60CFFB00408ED5 /* WebCJSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCJSContext.h; path = Core/WebCJSContext.h; sourceTree = "<group>"; };
+		FC4300D31F60CFFB00408ED5 /* WebCJSContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCJSContext.m; path = Core/WebCJSContext.m; sourceTree = "<group>"; };
+		FC4300D51F60D00600408ED5 /* WebCAppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCAppCore.h; path = Core/WebCAppCore.h; sourceTree = "<group>"; };
+		FC4300D61F60D00600408ED5 /* WebCAppCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCAppCore.m; path = Core/WebCAppCore.m; sourceTree = "<group>"; };
+		FC4300D91F60DB9600408ED5 /* WebCJSPluginManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCJSPluginManage.h; path = Core/WebCJSPluginManage.h; sourceTree = "<group>"; };
+		FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCJSPluginManage.m; path = Core/WebCJSPluginManage.m; sourceTree = "<group>"; };
+		FC4300EC1F6108E800408ED5 /* jsbridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = jsbridge.js; path = ../../dist/jsbridge.js; sourceTree = "<group>"; };
+		FC4300F11F6121D600408ED5 /* WebCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCNetwork.h; path = Core/WebCNetwork.h; sourceTree = "<group>"; };
+		FC4300F21F6121D600408ED5 /* WebCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCNetwork.m; path = Core/WebCNetwork.m; sourceTree = "<group>"; };
+		FC4300F41F6121E200408ED5 /* WebCPluginLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCPluginLog.h; path = Core/WebCPluginLog.h; sourceTree = "<group>"; };
+		FC4300F51F6121E200408ED5 /* WebCPluginLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCPluginLog.m; path = Core/WebCPluginLog.m; sourceTree = "<group>"; };
+		FC4300F61F6121E200408ED5 /* WebCPluginNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCPluginNavigation.h; path = Core/WebCPluginNavigation.h; sourceTree = "<group>"; };
+		FC4300F71F6121E200408ED5 /* WebCPluginNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCPluginNavigation.m; path = Core/WebCPluginNavigation.m; sourceTree = "<group>"; };
+		FC4300FA1F6121EE00408ED5 /* WebCPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCPlugin.h; path = Core/WebCPlugin.h; sourceTree = "<group>"; };
+		FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCPlugin.m; path = Core/WebCPlugin.m; sourceTree = "<group>"; };
+		FC4301011F612F4D00408ED5 /* WebCUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCUIViewController.h; path = Core/WebCUIViewController.h; sourceTree = "<group>"; };
+		FC4301021F612F4D00408ED5 /* WebCUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCUIViewController.m; path = Core/WebCUIViewController.m; sourceTree = "<group>"; };
+		FC4301041F612FE900408ED5 /* WebCViewManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCViewManage.h; path = Core/WebCViewManage.h; sourceTree = "<group>"; };
+		FC4301051F612FE900408ED5 /* WebCViewManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCViewManage.m; path = Core/WebCViewManage.m; sourceTree = "<group>"; };
+		FC551CD71F5FF58400C5466F /* WebC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC551CDB1F5FF58400C5466F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC551CDD1F5FF58400C5466F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FC551CDE1F5FF58400C5466F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC551CE41F5FF58400C5466F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC551CE61F5FF58400C5466F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC551CE91F5FF58400C5466F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC551CEB1F5FF58400C5466F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC551CF11F5FF79C00C5466F /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		FC551CF21F5FF79C00C5466F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		FC551CF51F5FF9E300C5466F /* WebCAppManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCAppManage.h; path = Core/WebCAppManage.h; sourceTree = "<group>"; };
+		FC551CF61F5FF9E300C5466F /* WebCAppManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCAppManage.m; path = Core/WebCAppManage.m; sourceTree = "<group>"; };
+		FC551CFD1F5FFE2200C5466F /* framework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = framework.js; path = ../../dist/framework.js; sourceTree = "<group>"; };
+		FC551CFE1F5FFE2200C5466F /* vue.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = vue.js; path = ../../dist/vue.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC551CD41F5FF58400C5466F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43B0F71D6C99EAB37617E225 /* libPods-WebC.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FC420814B51554D885FB290 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				78C2BE6A88D3A8A743E47CE1 /* Pods-WebC.debug.xcconfig */,
+				7849F4BC9F240F72ED67CCBC /* Pods-WebC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D6C568DF054EE794D33E3844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0C0EE7E5E1A297A2FB5B053 /* libPods-WebC.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC4300CE1F60CEAA00408ED5 /* JSBridge */ = {
+			isa = PBXGroup;
+			children = (
+				FC4300D81F60DB7100408ED5 /* JSPlugins */,
+				FC4300FA1F6121EE00408ED5 /* WebCPlugin.h */,
+				FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */,
+				FC4300CF1F60CFC300408ED5 /* WebCJSBridge.h */,
+				FC4300D01F60CFC300408ED5 /* WebCJSBridge.m */,
+				FC4300D91F60DB9600408ED5 /* WebCJSPluginManage.h */,
+				FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */,
+			);
+			name = JSBridge;
+			sourceTree = "<group>";
+		};
+		FC4300D81F60DB7100408ED5 /* JSPlugins */ = {
+			isa = PBXGroup;
+			children = (
+				FC4300F41F6121E200408ED5 /* WebCPluginLog.h */,
+				FC4300F51F6121E200408ED5 /* WebCPluginLog.m */,
+				FC4300F61F6121E200408ED5 /* WebCPluginNavigation.h */,
+				FC4300F71F6121E200408ED5 /* WebCPluginNavigation.m */,
+			);
+			name = JSPlugins;
+			sourceTree = "<group>";
+		};
+		FC4300E81F60E98C00408ED5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FC4300F11F6121D600408ED5 /* WebCNetwork.h */,
+				FC4300F21F6121D600408ED5 /* WebCNetwork.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		FC4300FD1F612EC900408ED5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				FC4301011F612F4D00408ED5 /* WebCUIViewController.h */,
+				FC4301021F612F4D00408ED5 /* WebCUIViewController.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		FC551CCE1F5FF58400C5466F = {
+			isa = PBXGroup;
+			children = (
+				FC551CD91F5FF58400C5466F /* WebC */,
+				FC551CD81F5FF58400C5466F /* Products */,
+				0FC420814B51554D885FB290 /* Pods */,
+				D6C568DF054EE794D33E3844 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FC551CD81F5FF58400C5466F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC551CD71F5FF58400C5466F /* WebC.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC551CD91F5FF58400C5466F /* WebC */ = {
+			isa = PBXGroup;
+			children = (
+				FC4300FD1F612EC900408ED5 /* UI */,
+				FC551CF81F5FFBFB00C5466F /* AppCore */,
+				FC551CF41F5FF97500C5466F /* AppManage */,
+				FC551CFC1F5FFDF100C5466F /* Resource */,
+				FC4300E81F60E98C00408ED5 /* Network */,
+				FC4300CE1F60CEAA00408ED5 /* JSBridge */,
+				FC551CDD1F5FF58400C5466F /* AppDelegate.h */,
+				FC551CDE1F5FF58400C5466F /* AppDelegate.m */,
+				FC551CF11F5FF79C00C5466F /* RootViewController.h */,
+				FC551CF21F5FF79C00C5466F /* RootViewController.m */,
+				FC551CE31F5FF58400C5466F /* Main.storyboard */,
+				FC551CE61F5FF58400C5466F /* Assets.xcassets */,
+				FC551CE81F5FF58400C5466F /* LaunchScreen.storyboard */,
+				FC551CEB1F5FF58400C5466F /* Info.plist */,
+				FC551CDA1F5FF58400C5466F /* Supporting Files */,
+			);
+			path = WebC;
+			sourceTree = "<group>";
+		};
+		FC551CDA1F5FF58400C5466F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC551CDB1F5FF58400C5466F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC551CF41F5FF97500C5466F /* AppManage */ = {
+			isa = PBXGroup;
+			children = (
+				FC551CF51F5FF9E300C5466F /* WebCAppManage.h */,
+				FC551CF61F5FF9E300C5466F /* WebCAppManage.m */,
+			);
+			name = AppManage;
+			sourceTree = "<group>";
+		};
+		FC551CF81F5FFBFB00C5466F /* AppCore */ = {
+			isa = PBXGroup;
+			children = (
+				FC4301041F612FE900408ED5 /* WebCViewManage.h */,
+				FC4301051F612FE900408ED5 /* WebCViewManage.m */,
+				FC4300D51F60D00600408ED5 /* WebCAppCore.h */,
+				FC4300D61F60D00600408ED5 /* WebCAppCore.m */,
+				FC4300D21F60CFFB00408ED5 /* WebCJSContext.h */,
+				FC4300D31F60CFFB00408ED5 /* WebCJSContext.m */,
+			);
+			name = AppCore;
+			sourceTree = "<group>";
+		};
+		FC551CFC1F5FFDF100C5466F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FC4300EC1F6108E800408ED5 /* jsbridge.js */,
+				FC551CFD1F5FFE2200C5466F /* framework.js */,
+				FC551CFE1F5FFE2200C5466F /* vue.js */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC551CD61F5FF58400C5466F /* WebC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC551CEE1F5FF58400C5466F /* Build configuration list for PBXNativeTarget "WebC" */;
+			buildPhases = (
+				44CB588FF4A741D4BDD3787F /* [CP] Check Pods Manifest.lock */,
+				FC551CD31F5FF58400C5466F /* Sources */,
+				FC551CD41F5FF58400C5466F /* Frameworks */,
+				FC551CD51F5FF58400C5466F /* Resources */,
+				DFB0DD220BDEBBF2677676E8 /* [CP] Embed Pods Frameworks */,
+				228CC25CA4CA31589CCE2B4B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WebC;
+			productName = WebC;
+			productReference = FC551CD71F5FF58400C5466F /* WebC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC551CCF1F5FF58400C5466F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Long Zhou";
+				TargetAttributes = {
+					FC551CD61F5FF58400C5466F = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = C89ZCUY868;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC551CD21F5FF58400C5466F /* Build configuration list for PBXProject "WebC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC551CCE1F5FF58400C5466F;
+			productRefGroup = FC551CD81F5FF58400C5466F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC551CD61F5FF58400C5466F /* WebC */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC551CD51F5FF58400C5466F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC551D001F5FFE2300C5466F /* vue.js in Resources */,
+				FC551CEA1F5FF58400C5466F /* LaunchScreen.storyboard in Resources */,
+				FC4300ED1F6108E800408ED5 /* jsbridge.js in Resources */,
+				FC551CFF1F5FFE2300C5466F /* framework.js in Resources */,
+				FC551CE71F5FF58400C5466F /* Assets.xcassets in Resources */,
+				FC551CE51F5FF58400C5466F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		228CC25CA4CA31589CCE2B4B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebC/Pods-WebC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44CB588FF4A741D4BDD3787F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DFB0DD220BDEBBF2677676E8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebC/Pods-WebC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC551CD31F5FF58400C5466F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC4300F91F6121E200408ED5 /* WebCPluginNavigation.m in Sources */,
+				FC551CDF1F5FF58400C5466F /* AppDelegate.m in Sources */,
+				FC4300FC1F6121EE00408ED5 /* WebCPlugin.m in Sources */,
+				FC551CF71F5FF9E300C5466F /* WebCAppManage.m in Sources */,
+				FC4300D71F60D00600408ED5 /* WebCAppCore.m in Sources */,
+				FC4301031F612F4D00408ED5 /* WebCUIViewController.m in Sources */,
+				FC4301061F612FE900408ED5 /* WebCViewManage.m in Sources */,
+				FC551CDC1F5FF58400C5466F /* main.m in Sources */,
+				FC4300F81F6121E200408ED5 /* WebCPluginLog.m in Sources */,
+				FC4300F31F6121D600408ED5 /* WebCNetwork.m in Sources */,
+				FC4300D41F60CFFB00408ED5 /* WebCJSContext.m in Sources */,
+				FC4300DB1F60DB9600408ED5 /* WebCJSPluginManage.m in Sources */,
+				FC551CF31F5FF79C00C5466F /* RootViewController.m in Sources */,
+				FC4300D11F60CFC300408ED5 /* WebCJSBridge.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC551CE31F5FF58400C5466F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC551CE41F5FF58400C5466F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FC551CE81F5FF58400C5466F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC551CE91F5FF58400C5466F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC551CEC1F5FF58400C5466F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC551CED1F5FF58400C5466F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC551CEF1F5FF58400C5466F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78C2BE6A88D3A8A743E47CE1 /* Pods-WebC.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C89ZCUY868;
+				INFOPLIST_FILE = WebC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.WebC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FC551CF01F5FF58400C5466F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7849F4BC9F240F72ED67CCBC /* Pods-WebC.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C89ZCUY868;
+				INFOPLIST_FILE = WebC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.WebC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC551CD21F5FF58400C5466F /* Build configuration list for PBXProject "WebC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC551CEC1F5FF58400C5466F /* Debug */,
+				FC551CED1F5FF58400C5466F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC551CEE1F5FF58400C5466F /* Build configuration list for PBXNativeTarget "WebC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC551CEF1F5FF58400C5466F /* Debug */,
+				FC551CF01F5FF58400C5466F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC551CCF1F5FF58400C5466F /* Project object */;
+}

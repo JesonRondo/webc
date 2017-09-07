@@ -10,13 +10,21 @@ module.exports = {
     browser: true,
   },
   globals: {
-    'webc': false
+    'Vue': false,
+    'webc': false,
+    '__bridge': false,
+    '__webc_bridge_call': false,
+    '__webc_bridge_handle': false
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: 'standard',
+  extends: [
+    'standard',
+    'plugin:flowtype/recommended'
+  ],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html',
+    'flowtype'
   ],
   // add your custom rules here
   'rules': {

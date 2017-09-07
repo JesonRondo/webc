@@ -8,10 +8,6 @@
 
 #import "WebCPluginLog.h"
 
-@interface WebCPlugin()
-
-@end
-
 @implementation WebCPluginLog
 
 - (void)registPluginWith:(WebCJSBridge *)bridge withContext:(JSContext *)context {

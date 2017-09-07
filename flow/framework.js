@@ -6,4 +6,4 @@ declare type AppInfo = {
   pages: AppPages;
 }
 
-type AppInstance = { id: string, instance: Object }
+type AppPageInstance = { id: string, instance: Object }

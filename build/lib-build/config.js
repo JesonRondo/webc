@@ -16,7 +16,7 @@ function banner (name) {
 }
 
 const frameworkBanner = banner('framework')
-// const bridgeBanner = banner('jsbridge')
+const bridgeBanner = banner('jsbridge')
 
 const aliases = require('./alias')
 
@@ -45,6 +45,7 @@ const builds = {
     entry: resolve('src/framework/index.js'),
     dest: resolve('dist/framework.js'),
     format: 'umd',
+    name: 'window',
     env: 'development',
     banner: frameworkBanner
   },
@@ -52,23 +53,26 @@ const builds = {
     entry: resolve('src/framework/index.js'),
     dest: resolve('dist/framework.min.js'),
     format: 'umd',
+    name: 'window',
     env: 'production',
     banner: frameworkBanner
+  },
+  'jsbridge-dev': {
+    entry: resolve('src/jsbridge/index.js'),
+    dest: resolve('dist/jsbridge.js'),
+    format: 'umd',
+    name: '__bridge',
+    env: 'development',
+    banner: bridgeBanner
+  },
+  'jsbridge-prod': {
+    entry: resolve('src/jsbridge/index.js'),
+    dest: resolve('dist/jsbridge.min.js'),
+    format: 'umd',
+    name: '__bridge',
+    env: 'production',
+    banner: bridgeBanner
   }
-  // 'jsbridge-dev': {
-  //   entry: resolve('src/entry/jsbridge-web.js'),
-  //   dest: resolve('dist/jsbridge.js'),
-  //   format: 'es',
-  //   env: 'development',
-  //   banner: bridgeBanner
-  // },
-  // 'jsbridge-prod': {
-  //   entry: resolve('src/entry/jsbridge-web.js'),
-  //   dest: resolve('dist/jsbridge.min.js'),
-  //   format: 'umd',
-  //   env: 'production',
-  //   banner: bridgeBanner
-  // }
 }
 
 function genConfig (opts) {
@@ -79,7 +83,7 @@ function genConfig (opts) {
       format: opts.format
     },
     banner: opts.banner,
-    name: 'webc',
+    name: opts.name,
     plugins: [
       flow(),
       buble(),

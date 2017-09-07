@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface WebCAppManage : NSObject
+
++ (instancetype)shareInstance;
+
+// navigation bar
+@property(nonatomic, strong) UINavigationController *navigation;
+// 加载一个App
+- (void)launchAppKeyName:(NSString *)name withBundle:(NSString *)bundle;
 
 @end

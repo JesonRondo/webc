@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WebCUIViewController.h"
 
 @interface WebCViewManage : NSObject
+
+- (WebCUIViewController *)newUIViewForKey:(NSString *)key;
 
 @end

@@ -8,6 +8,6 @@
 
 #import "WebCPlugin.h"
 
-@interface WebCPluginLog : WebCPlugin <WebCPluginProtocol>
+@interface WebCPluginLog : WebCPlugin
 
 @end

@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WebCJSBridge.h"
 
 @interface WebCJSPluginManage : NSObject
+
+- (id)initWithBridge:(WebCJSBridge *)bridge;
+
+// 加载所有插件
+- (void)loadPlugins;
 
 @end

@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev:demo": "node build/dev-server.js -a ./examples/douban",
+    "dev:jsbridge": "rollup -w -c build/lib-build/config.js --environment TARGET:jsbridge-dev",
     "dev:framework": "rollup -w -c build/lib-build/config.js --environment TARGET:framework-dev",
     "build": "node build/lib-build/build.js",
     "build:demo": "node build/build.js -a ./examples/douban",

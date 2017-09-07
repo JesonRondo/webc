@@ -36,18 +36,15 @@ module.exports = function () {
 
   componentsInfo.forEach(info => {
     importInfo += `import ${info.name} from '${info.path}'\n`
-    componentInfo += `webc.app.setComponent('${info.name}', ${info.name})\n`
+    componentInfo += `webc.appSetComponent('${info.name}', ${info.name})\n`
   })
 
   fs.writeFileSync(`${shellRoot}/index.js`,
 `${importInfo}
 // 注册App信息
-webc.app.install(${JSON.stringify(appConfig)})
+webc.appInstall(${JSON.stringify(appConfig)})
 
 // 引入组件
 ${componentInfo}
-
-// 启动App
-webc.app.start()
 `, 'utf8')
 }

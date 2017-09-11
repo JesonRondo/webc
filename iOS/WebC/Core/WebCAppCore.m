@@ -58,17 +58,31 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pushNewPageNotificationAction:) name:@"WebCPushNewPageNotification"
                                                object:nil];
+    
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sendMsgToPageNotificationAction:) name:@"WebCSendMsgToPageNotification"
+                                               object:nil];
 }
 
 // 打开新页面
 - (void)pushNewPageNotificationAction:(NSNotification *)notification {
     NSMutableDictionary *payload = notification.object;
-    NSLog(@"收到通知 %@", payload);
-
-    NSString *pageId = (NSString *)[payload objectForKey:@"pageId"];
+    NSNumber *pageId = (NSNumber *)[payload objectForKey:@"pageId"];
     
     WebCUIViewController *vc = [self.viewManage newUIViewForKey:pageId];
     [self.navigation pushViewController:vc animated:YES];
+}
+
+// 向页面发送消息
+- (void)sendMsgToPageNotificationAction:(NSNotification *)notification {
+    NSMutableDictionary *payload = notification.object;
+
+    NSString *cmd = (NSString *)[payload objectForKey:@"cmd"];
+    NSNumber *pageId = (NSNumber *)[payload objectForKey:@"targetId"];
+    NSMutableDictionary *data = (NSMutableDictionary *)[payload objectForKey:@"data"];
+    
+    [self.viewManage sendUIViewMessageToTarget:pageId command:cmd data:data];
 }
 
 @end

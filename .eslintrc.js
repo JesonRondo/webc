@@ -12,6 +12,7 @@ module.exports = {
   globals: {
     'Vue': false,
     'webc': false,
+    'uiKit': false,
     '__bridge': false,
     '__webc_bridge_call': false,
     '__webc_bridge_handle': false

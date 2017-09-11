@@ -17,6 +17,8 @@ function banner (name) {
 
 const frameworkBanner = banner('framework')
 const bridgeBanner = banner('jsbridge')
+const viewBanner = banner('view')
+const deliverBanner = banner('vue-plugin-deliver')
 
 const aliases = require('./alias')
 
@@ -41,6 +43,22 @@ const copies = {
 }
 
 const builds = {
+  'vue-plugin-deliver-dev': {
+    entry: resolve('src/vue-plugin-deliver/index.js'),
+    dest: resolve('dist/vue-plugin-deliver.js'),
+    format: 'umd',
+    name: 'deliver',
+    env: 'development',
+    banner: deliverBanner
+  },
+  'vue-plugin-deliver-prod': {
+    entry: resolve('src/vue-plugin-deliver/index.js'),
+    dest: resolve('dist/vue-plugin-deliver.min.js'),
+    format: 'umd',
+    name: 'deliver',
+    env: 'production',
+    banner: deliverBanner
+  },
   'framework-dev': {
     entry: resolve('src/framework/index.js'),
     dest: resolve('dist/framework.js'),
@@ -72,6 +90,22 @@ const builds = {
     name: '__bridge',
     env: 'production',
     banner: bridgeBanner
+  },
+  'view-dev': {
+    entry: resolve('src/view/index.js'),
+    dest: resolve('dist/view.js'),
+    format: 'umd',
+    name: 'uiKit',
+    env: 'development',
+    banner: viewBanner
+  },
+  'view-prod': {
+    entry: resolve('src/view/index.js'),
+    dest: resolve('dist/view.min.js'),
+    format: 'umd',
+    name: 'uiKit',
+    env: 'production',
+    banner: viewBanner
   }
 }
 

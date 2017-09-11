@@ -10,15 +10,13 @@
 
 @implementation WebCPluginLog
 
-- (void)registPluginWith:(WebCJSBridge *)bridge withContext:(JSContext *)context {
+- (void)registPluginWith:(WebCJSBridge *)bridge {
     // log func
-    [bridge registerMessage:@"log" forHandler:^(id data, JSValue *callback) {
+    [bridge registerMessage:@"log" forHandler:^(id data, NSNumber *callbackId) {
         NSString *msg = (NSString *)data;
         NSLog(@"log >>> %@", msg);
-        
-        NSMutableArray *args = [[NSMutableArray alloc] init];
-        [args addObject:[JSValue valueWithUndefinedInContext:context]];
-        [callback callWithArguments:args];
+
+        [bridge callHandlerWithData:nil error:nil handle:callbackId];
     }];
 }
 

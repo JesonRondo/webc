@@ -14,21 +14,25 @@ export const navigateTo = (opts: {
   complete?: Function,
 }) => {
   const {
-    url
-    // success,
-    // fail,
-    // complete
+    url,
+    success,
+    fail,
+    complete
   } = opts
 
   if (url && getPages().indexOf(url) >= 0) {
     const appCom: Object = getComponent('app')
     const pageCom: Object = getComponent(pathToKey(url))
-
     const pageInst: AppPageInstance = newPage(appCom, pageCom)
 
-    console.log('jump to ', url)
-    console.log('page inst ', pageInst)
-
-    __bridge.navigation.pushWindow(pageInst)
+    __bridge.navigation.pushWindow(pageInst, (error, result) => {
+      if (error) {
+        fail && fail(error)
+      } else {
+        pageInst.instance.$mount()
+        success && success(result)
+      }
+      complete && complete()
+    })
   }
 }

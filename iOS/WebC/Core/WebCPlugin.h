@@ -14,7 +14,7 @@
 
 @required
 
-- (void)registPluginWith:(WebCJSBridge *)bridge inContext:(JSContext *)context;
+- (void)registPluginWith:(WebCJSBridge *)bridge;
 
 @end
 

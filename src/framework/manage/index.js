@@ -1,16 +1,11 @@
 /* @flow */
 
-let id: number = 0
-const pageMap: { [string]: AppInstance } = {}
+const pageMap: { [string]: AppPageInstance } = {}
 
 // 页面
 const pages: AppPages = []
 // 组件
 const components: AppComponents = {}
-
-function getID (): string {
-  return 'page-instance-' + (id++)
-}
 
 // 增加页面信息
 export const addPage = (page: string) => {
@@ -43,7 +38,7 @@ export const newPage = (app: Object, page: Object): AppPageInstance => {
     components: { app, page }
   })
 
-  const id: string = getID()
+  const id: string = instance._uid
   const inst: AppPageInstance = { id, instance }
 
   pageMap[id] = inst

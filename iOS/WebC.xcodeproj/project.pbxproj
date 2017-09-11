@@ -11,7 +11,6 @@
 		FC4300D11F60CFC300408ED5 /* WebCJSBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D01F60CFC300408ED5 /* WebCJSBridge.m */; };
 		FC4300D41F60CFFB00408ED5 /* WebCJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D31F60CFFB00408ED5 /* WebCJSContext.m */; };
 		FC4300D71F60D00600408ED5 /* WebCAppCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300D61F60D00600408ED5 /* WebCAppCore.m */; };
-		FC4300DB1F60DB9600408ED5 /* WebCJSPluginManage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */; };
 		FC4300ED1F6108E800408ED5 /* jsbridge.js in Resources */ = {isa = PBXBuildFile; fileRef = FC4300EC1F6108E800408ED5 /* jsbridge.js */; };
 		FC4300F31F6121D600408ED5 /* WebCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300F21F6121D600408ED5 /* WebCNetwork.m */; };
 		FC4300F81F6121E200408ED5 /* WebCPluginLog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300F51F6121E200408ED5 /* WebCPluginLog.m */; };
@@ -19,6 +18,11 @@
 		FC4300FC1F6121EE00408ED5 /* WebCPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */; };
 		FC4301031F612F4D00408ED5 /* WebCUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4301021F612F4D00408ED5 /* WebCUIViewController.m */; };
 		FC4301061F612FE900408ED5 /* WebCViewManage.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4301051F612FE900408ED5 /* WebCViewManage.m */; };
+		FC4301081F6138AA00408ED5 /* view.html in Resources */ = {isa = PBXBuildFile; fileRef = FC4301071F6138AA00408ED5 /* view.html */; };
+		FC43010A1F613BF100408ED5 /* view.js in Resources */ = {isa = PBXBuildFile; fileRef = FC4301091F613BF100408ED5 /* view.js */; };
+		FC43010D1F61408800408ED5 /* WebCWebview.m in Sources */ = {isa = PBXBuildFile; fileRef = FC43010C1F61408800408ED5 /* WebCWebview.m */; };
+		FC514D1C1F62532D00CB4AC2 /* vue-plugin-deliver.js in Resources */ = {isa = PBXBuildFile; fileRef = FC514D1B1F62532D00CB4AC2 /* vue-plugin-deliver.js */; };
+		FC514D1F1F62728F00CB4AC2 /* WebCPluginNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = FC514D1E1F62728F00CB4AC2 /* WebCPluginNotification.m */; };
 		FC551CDC1F5FF58400C5466F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CDB1F5FF58400C5466F /* main.m */; };
 		FC551CDF1F5FF58400C5466F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC551CDE1F5FF58400C5466F /* AppDelegate.m */; };
 		FC551CE51F5FF58400C5466F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC551CE31F5FF58400C5466F /* Main.storyboard */; };
@@ -40,8 +44,6 @@
 		FC4300D31F60CFFB00408ED5 /* WebCJSContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCJSContext.m; path = Core/WebCJSContext.m; sourceTree = "<group>"; };
 		FC4300D51F60D00600408ED5 /* WebCAppCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCAppCore.h; path = Core/WebCAppCore.h; sourceTree = "<group>"; };
 		FC4300D61F60D00600408ED5 /* WebCAppCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCAppCore.m; path = Core/WebCAppCore.m; sourceTree = "<group>"; };
-		FC4300D91F60DB9600408ED5 /* WebCJSPluginManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCJSPluginManage.h; path = Core/WebCJSPluginManage.h; sourceTree = "<group>"; };
-		FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCJSPluginManage.m; path = Core/WebCJSPluginManage.m; sourceTree = "<group>"; };
 		FC4300EC1F6108E800408ED5 /* jsbridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = jsbridge.js; path = ../../dist/jsbridge.js; sourceTree = "<group>"; };
 		FC4300F11F6121D600408ED5 /* WebCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCNetwork.h; path = Core/WebCNetwork.h; sourceTree = "<group>"; };
 		FC4300F21F6121D600408ED5 /* WebCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCNetwork.m; path = Core/WebCNetwork.m; sourceTree = "<group>"; };
@@ -55,6 +57,13 @@
 		FC4301021F612F4D00408ED5 /* WebCUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCUIViewController.m; path = Core/WebCUIViewController.m; sourceTree = "<group>"; };
 		FC4301041F612FE900408ED5 /* WebCViewManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCViewManage.h; path = Core/WebCViewManage.h; sourceTree = "<group>"; };
 		FC4301051F612FE900408ED5 /* WebCViewManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCViewManage.m; path = Core/WebCViewManage.m; sourceTree = "<group>"; };
+		FC4301071F6138AA00408ED5 /* view.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = view.html; path = ../../tpl/view.html; sourceTree = "<group>"; };
+		FC4301091F613BF100408ED5 /* view.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = view.js; path = ../../dist/view.js; sourceTree = "<group>"; };
+		FC43010B1F61408800408ED5 /* WebCWebview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebCWebview.h; sourceTree = "<group>"; };
+		FC43010C1F61408800408ED5 /* WebCWebview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebCWebview.m; sourceTree = "<group>"; };
+		FC514D1B1F62532D00CB4AC2 /* vue-plugin-deliver.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "vue-plugin-deliver.js"; path = "../../dist/vue-plugin-deliver.js"; sourceTree = "<group>"; };
+		FC514D1D1F62728F00CB4AC2 /* WebCPluginNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebCPluginNotification.h; path = Core/WebCPluginNotification.h; sourceTree = "<group>"; };
+		FC514D1E1F62728F00CB4AC2 /* WebCPluginNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebCPluginNotification.m; path = Core/WebCPluginNotification.m; sourceTree = "<group>"; };
 		FC551CD71F5FF58400C5466F /* WebC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC551CDB1F5FF58400C5466F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC551CDD1F5FF58400C5466F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -104,12 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				FC4300D81F60DB7100408ED5 /* JSPlugins */,
-				FC4300FA1F6121EE00408ED5 /* WebCPlugin.h */,
-				FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */,
 				FC4300CF1F60CFC300408ED5 /* WebCJSBridge.h */,
 				FC4300D01F60CFC300408ED5 /* WebCJSBridge.m */,
-				FC4300D91F60DB9600408ED5 /* WebCJSPluginManage.h */,
-				FC4300DA1F60DB9600408ED5 /* WebCJSPluginManage.m */,
 			);
 			name = JSBridge;
 			sourceTree = "<group>";
@@ -121,6 +126,10 @@
 				FC4300F51F6121E200408ED5 /* WebCPluginLog.m */,
 				FC4300F61F6121E200408ED5 /* WebCPluginNavigation.h */,
 				FC4300F71F6121E200408ED5 /* WebCPluginNavigation.m */,
+				FC514D1D1F62728F00CB4AC2 /* WebCPluginNotification.h */,
+				FC514D1E1F62728F00CB4AC2 /* WebCPluginNotification.m */,
+				FC4300FA1F6121EE00408ED5 /* WebCPlugin.h */,
+				FC4300FB1F6121EE00408ED5 /* WebCPlugin.m */,
 			);
 			name = JSPlugins;
 			sourceTree = "<group>";
@@ -134,13 +143,15 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		FC4300FD1F612EC900408ED5 /* UI */ = {
+		FC4300FD1F612EC900408ED5 /* PageCore */ = {
 			isa = PBXGroup;
 			children = (
+				FC43010B1F61408800408ED5 /* WebCWebview.h */,
+				FC43010C1F61408800408ED5 /* WebCWebview.m */,
 				FC4301011F612F4D00408ED5 /* WebCUIViewController.h */,
 				FC4301021F612F4D00408ED5 /* WebCUIViewController.m */,
 			);
-			name = UI;
+			name = PageCore;
 			sourceTree = "<group>";
 		};
 		FC551CCE1F5FF58400C5466F = {
@@ -164,7 +175,7 @@
 		FC551CD91F5FF58400C5466F /* WebC */ = {
 			isa = PBXGroup;
 			children = (
-				FC4300FD1F612EC900408ED5 /* UI */,
+				FC4300FD1F612EC900408ED5 /* PageCore */,
 				FC551CF81F5FFBFB00C5466F /* AppCore */,
 				FC551CF41F5FF97500C5466F /* AppManage */,
 				FC551CFC1F5FFDF100C5466F /* Resource */,
@@ -216,9 +227,12 @@
 		FC551CFC1F5FFDF100C5466F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FC514D1B1F62532D00CB4AC2 /* vue-plugin-deliver.js */,
 				FC4300EC1F6108E800408ED5 /* jsbridge.js */,
 				FC551CFD1F5FFE2200C5466F /* framework.js */,
 				FC551CFE1F5FFE2200C5466F /* vue.js */,
+				FC4301091F613BF100408ED5 /* view.js */,
+				FC4301071F6138AA00408ED5 /* view.html */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -287,10 +301,13 @@
 			files = (
 				FC551D001F5FFE2300C5466F /* vue.js in Resources */,
 				FC551CEA1F5FF58400C5466F /* LaunchScreen.storyboard in Resources */,
+				FC514D1C1F62532D00CB4AC2 /* vue-plugin-deliver.js in Resources */,
 				FC4300ED1F6108E800408ED5 /* jsbridge.js in Resources */,
 				FC551CFF1F5FFE2300C5466F /* framework.js in Resources */,
 				FC551CE71F5FF58400C5466F /* Assets.xcassets in Resources */,
+				FC43010A1F613BF100408ED5 /* view.js in Resources */,
 				FC551CE51F5FF58400C5466F /* Main.storyboard in Resources */,
+				FC4301081F6138AA00408ED5 /* view.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,10 +374,11 @@
 				FC4301031F612F4D00408ED5 /* WebCUIViewController.m in Sources */,
 				FC4301061F612FE900408ED5 /* WebCViewManage.m in Sources */,
 				FC551CDC1F5FF58400C5466F /* main.m in Sources */,
+				FC514D1F1F62728F00CB4AC2 /* WebCPluginNotification.m in Sources */,
 				FC4300F81F6121E200408ED5 /* WebCPluginLog.m in Sources */,
 				FC4300F31F6121D600408ED5 /* WebCNetwork.m in Sources */,
 				FC4300D41F60CFFB00408ED5 /* WebCJSContext.m in Sources */,
-				FC4300DB1F60DB9600408ED5 /* WebCJSPluginManage.m in Sources */,
+				FC43010D1F61408800408ED5 /* WebCWebview.m in Sources */,
 				FC551CF31F5FF79C00C5466F /* RootViewController.m in Sources */,
 				FC4300D11F60CFC300408ED5 /* WebCJSBridge.m in Sources */,
 			);

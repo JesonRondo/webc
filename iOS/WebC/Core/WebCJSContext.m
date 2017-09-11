@@ -8,7 +8,8 @@
 
 #import "WebCJSContext.h"
 #import "WebCJSBridge.h"
-#import "WebCJSPluginManage.h"
+#import "WebCPluginNavigation.h"
+#import "WebCPluginNotification.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
 @interface WebCJSContext ()
@@ -25,12 +26,18 @@
 - (id)init {
     if (self = [super init]) {
         self.context = [[JSContext alloc] init];
+        self.context.exceptionHandler = ^(JSContext *context, JSValue *exception) {
+            [JSContext currentContext].exception = exception;
+            NSLog(@"JSCore Exception: %@", exception);
+        };
+        
         self.execQueue = [[NSMutableArray alloc] init];
         self.isEnvReady = NO;
 
         [self initJSBridge];
         [self initFramework];
         [self initVue];
+        [self initVuePlugin];
     }
     
     return self;
@@ -40,8 +47,12 @@
     [self evaluateLocalScript:@"jsbridge"];
     self.bridge = [[WebCJSBridge alloc] initBridgeForJSCore:self.context];
 
-    WebCJSPluginManage *pluginManager = [[WebCJSPluginManage alloc] initWithBridge:self.bridge];
-    [pluginManager loadPlugins];
+    // plugins
+    WebCPluginNavigation *pluginNaviagtion = [[WebCPluginNavigation alloc] init];
+    [pluginNaviagtion registPluginWith:self.bridge];
+    
+    WebCPluginNotification *pluginNotification = [[WebCPluginNotification alloc] init];
+    [pluginNotification registPluginWith:self.bridge];
 }
 
 - (void)initFramework {
@@ -51,6 +62,10 @@
 
 - (void)initVue {
     [self evaluateLocalScript:@"vue"];
+}
+
+- (void)initVuePlugin {
+    [self evaluateLocalScript:@"vue-plugin-deliver"];
 }
 
 - (void)envReady {

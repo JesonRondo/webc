@@ -14,7 +14,7 @@
 
 @implementation WebCPlugin
 
-- (void)registPluginWith:(WebCJSBridge *)bridge inContext:(JSContext *)context {
+- (void)registPluginWith:(WebCJSBridge *)bridge {
     // 重载
 }
 

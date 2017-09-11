@@ -23,11 +23,16 @@
     return self;
 }
 
-- (WebCUIViewController *)newUIViewForKey:(NSString *)key {
-    WebCUIViewController *vc = [[WebCUIViewController alloc] init];
+- (WebCUIViewController *)newUIViewForKey:(NSNumber *)key {
+    WebCUIViewController *vc = [WebCUIViewController getInstance];
     [self.viewMap setObject:vc forKey:key];
-    
+
     return vc;
+}
+
+- (void)sendUIViewMessageToTarget:(NSNumber *)key command:(NSString *)cmd data:(NSMutableDictionary *)data {
+    WebCUIViewController *vc = [self.viewMap objectForKey:key];
+    [vc sendCommand:cmd data:data];
 }
 
 @end

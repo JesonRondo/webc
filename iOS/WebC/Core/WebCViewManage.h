@@ -11,6 +11,9 @@
 
 @interface WebCViewManage : NSObject
 
-- (WebCUIViewController *)newUIViewForKey:(NSString *)key;
+// 新创建一个View
+- (WebCUIViewController *)newUIViewForKey:(NSNumber *)key;
+// 向指定View发送消息
+- (void)sendUIViewMessageToTarget:(NSNumber *)key command:(NSString *)cmd data:(NSDictionary *)data;
 
 @end

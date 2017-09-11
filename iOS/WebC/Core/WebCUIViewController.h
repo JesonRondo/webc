@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebCWebview.h"
 
-@interface WebCUIViewController : UIViewController
+@interface WebCUIViewController : UIViewController<WKNavigationDelegate>
+
++ (instancetype)getInstance;
+
+- (void)sendCommand:(NSString *)cmd data:(NSMutableDictionary *)data;
 
 @end

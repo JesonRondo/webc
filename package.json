@@ -6,8 +6,10 @@
   "private": true,
   "scripts": {
     "dev:demo": "node build/dev-server.js -a ./examples/douban",
+    "dev:view": "rollup -w -c build/lib-build/config.js --environment TARGET:view-dev",
     "dev:jsbridge": "rollup -w -c build/lib-build/config.js --environment TARGET:jsbridge-dev",
     "dev:framework": "rollup -w -c build/lib-build/config.js --environment TARGET:framework-dev",
+    "dev:vue-plugin-deliver": "rollup -w -c build/lib-build/config.js --environment TARGET:vue-plugin-deliver-dev",
     "build": "node build/lib-build/build.js",
     "build:demo": "node build/build.js -a ./examples/douban",
     "lint": "eslint --ext .js,.vue src",
